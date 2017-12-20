@@ -1,0 +1,9 @@
+- id: Donald Duck
+  bio: "He is a duck"
+  avatar: '../assets/images/duck_avatar.jpeg'
+- id: Mickey Mouse
+  bio: "He is a mouse"
+  avatar: '../assets/images/reactjs.png'
+- id: Jai
+  bio: "Jai is passionate about social issues and causes. He is the founder of sherpafeet and Tech47."
+  avatar: '../assets/images/jai.jpeg'
