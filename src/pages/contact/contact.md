@@ -1,7 +1,6 @@
 ---
 title: "Waiting to hear from you!"
 date: "2017-12-20"
-author: Jai
 ---
 
 ![contact us](contact.jpg)
