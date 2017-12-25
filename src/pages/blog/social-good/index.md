@@ -5,6 +5,7 @@ draft: false
 author: Jai
 image: children-cycle.jpg
 imgdesc: Technology For Social Good
+seodescription: Technology for Non Profits. If you are a social enterprise or NGO, we can help you with technology.
 tags:
   - Social Enterprises
   - Technology

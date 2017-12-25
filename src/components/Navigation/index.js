@@ -3,14 +3,34 @@ import Link from 'gatsby-link';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import Img from 'gatsby-image';
+import feather from '../../utils/feather';
 import colors from '../../utils/colors';
 import MobileNav from './mobile';
 import media from '../../utils/media';
 import { Box } from '../../components/Layout';
 import menusvg from './align-right.svg';
 
+const svgStyles = css`
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in;
+  transition: color 0.15s ease-in;
+
+  &:hover {
+    text-decoration: none;
+    box-shadow: none;
+    opacity: 1;
+    transition: opacity 0.15s ease-in;
+  }
+`;
+
 const menuConfig = [
-  { title: 'HOME', url: '/', submenu: false },
+  {
+    title: feather('github', ['30', '30'], svgStyles),
+    url: '',
+    href: 'https://github.com/Jaikant/tech47',
+    submenu: false
+  },
   {
     title: 'SERVICES',
     url: [
@@ -41,7 +61,7 @@ const MItmblStyle = css`
   margin-top: 2rem;
   text-transform: uppercase;
 `;
-const MItmbl = ({ to, toggleNav, children, key }) => (
+const MItmbl = ({ to, href, toggleNav, children, key }) => (
   <li className={MItmblStyle}>
     <div
       key={key}
@@ -50,7 +70,13 @@ const MItmbl = ({ to, toggleNav, children, key }) => (
       tabIndex="0"
       onKeyPress={toggleNav}
     >
-      <Link to={to}> {children} </Link>
+      {to === '' ? (
+        <a href={href} target="_blank">
+          {children}
+        </a>
+      ) : (
+        <Link to={to}>{children}</Link>
+      )}
     </div>
   </li>
 );
@@ -58,11 +84,13 @@ MItmbl.propTypes = {
   to: PropTypes.string.isRequired,
   toggleNav: PropTypes.func.isRequired,
   children: PropTypes.string,
-  key: PropTypes.string
+  key: PropTypes.string,
+  href: PropTypes.string
 };
 MItmbl.defaultProps = {
   children: '',
-  key: ''
+  key: '',
+  href: ''
 };
 
 const menuMobileStyle = css`
@@ -71,7 +99,7 @@ const menuMobileStyle = css`
   margin: 3rem 0 0 0;
   height: 100%;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.25em;
 `;
 
 const MenuMobile = ({ toggleNav }) => (
@@ -81,7 +109,12 @@ const MenuMobile = ({ toggleNav }) => (
         menu.submenu ? (
           <SubMenuMobile menu={menu} toggleNav={toggleNav} />
         ) : (
-          <MItmbl key={menu.url} to={menu.url} toggleNav={toggleNav}>
+          <MItmbl
+            key={menu.url}
+            to={menu.url}
+            href={menu.href}
+            toggleNav={toggleNav}
+          >
             {menu.title}
           </MItmbl>
         )
@@ -184,27 +217,36 @@ DropDownMenu.propTypes = {
 const liStyle = css`
   margin: auto;
 `;
-const LiItems = ({ to, children }) => (
+const LiItems = ({ to, href, children }) => (
   <li className={liStyle}>
-    <Link
-      to={to}
-      activeStyle={{
-        color: colors.primary
-      }}
-    >
-      {children}
-    </Link>
+    {to === '' ? (
+      <a href={href} target="_blank">
+        {children}
+      </a>
+    ) : (
+      <Link
+        to={to}
+        activeStyle={{
+          color: colors.primary
+        }}
+      >
+        {children}
+      </Link>
+    )}
   </li>
 );
 LiItems.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
-    PropTypes.string
+    PropTypes.string,
+    PropTypes.object
   ]).isRequired,
-  to: PropTypes.string.isRequired
+  to: PropTypes.string.isRequired,
+  href: PropTypes.string
 };
 LiItems.defaultProps = {
-  children: ''
+  children: '',
+  href: ''
 };
 
 // Menu Style
@@ -223,7 +265,7 @@ const Menu = () => (
         menu.submenu ? (
           <DropDownMenu key={menu.title} menu={menu} />
         ) : (
-          <LiItems key={menu.title} to={menu.url}>
+          <LiItems key={menu.title} to={menu.url} href={menu.href}>
             {menu.title}
           </LiItems>
         )
@@ -299,8 +341,7 @@ const mobileStyle = css`
 `;
 
 // Brand Style
-const H1brand = styled.h1`
-  color: ${colors.third};
+const logoClass = css`
   font-size: 1.5em;
   margin: 0px auto 0px 16px;
 `;
@@ -324,6 +365,7 @@ class Navigation extends Component {
   }
 
   render() {
+    console.log(' the props in navigation are: ', this.props);
     return (
       <nav>
         <Box className={desktopNav}>
@@ -333,7 +375,13 @@ class Navigation extends Component {
               color: colors.primary
             }}
           >
-            <H1brand>{this.props.title}</H1brand>
+            <img
+              className={logoClass}
+              width={160}
+              height={40}
+              src={this.props.logo}
+              alt="Tech47 Logo"
+            />
           </Link>
           <Menu />
         </Box>
@@ -344,7 +392,13 @@ class Navigation extends Component {
               color: colors.primary
             }}
           >
-            <H1brand>{this.props.title}</H1brand>
+            <img
+              className={logoClass}
+              width={160}
+              height={40}
+              src={this.props.logo}
+              alt="Tech47 Logo"
+            />
           </Link>
           <div
             onClick={this.toggleNav}
@@ -357,9 +411,9 @@ class Navigation extends Component {
         </Box>
         {this.state.mobileActive && (
           <MobileNav
-            title={this.props.title}
             toggleNav={this.toggleNav}
             mobileStyle={mobileStyle}
+            logo={this.props.logo}
           >
             <MenuMobile toggleNav={this.toggleNav} />
           </MobileNav>
@@ -370,11 +424,14 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  title: PropTypes.string
+  logo: PropTypes.shape({
+    srcSet: PropTypes.string.isRequired
+  })
 };
 
 Navigation.defaultProps = {
-  title: 'Your company'
+  title: 'Your company',
+  logo: {}
 };
 
 export default Navigation;

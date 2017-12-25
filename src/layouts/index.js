@@ -1,11 +1,13 @@
 import React from 'react';
 import styled, { injectGlobal } from 'react-emotion';
+import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import 'typeface-quattrocento-sans';
 import 'typeface-work-sans';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import colors from '../utils/colors';
+import favicon from '../assets/images/tech47-favicon2.png';
 
 /* eslint-disable */
 //import normalize from 'normalize.css';
@@ -36,7 +38,11 @@ const MainDiv = styled.div`
 
 const Layout = ({ children, data }) => (
   <MainDiv>
-    <Navigation title={data.site.siteMetadata.title} />
+    <Helmet>
+      <link rel="shortcut icon" href={favicon} type="image/x-icon" />
+      <link rel="icon" href={favicon} type="image/x-icon" />
+    </Helmet>
+    <Navigation title={data.site.siteMetadata.title} logo={data.logoImage.resize.src}/>
     {children()}
     <Footer title={data.site.siteMetadata.title} />
   </MainDiv>
@@ -49,6 +55,11 @@ Layout.propTypes = {
       siteMetadata: PropTypes.shape({
         title: PropTypes.string.isRequired
       }).isRequired
+    }).isRequired,
+    logoImage: PropTypes.shape({
+      resolutions: PropTypes.shape({
+        srcSet: PropTypes.string.isRequired
+      }).isRequired
     }).isRequired
   }).isRequired
 };
@@ -60,6 +71,12 @@ export const query = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    logoImage: imageSharp(id: { regex: "/Htech47/" }) {
+      resize(width: 1843, height: 425, cropFocus: CENTER) {
+        # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
+        src
       }
     }
   }

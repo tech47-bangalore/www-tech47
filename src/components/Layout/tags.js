@@ -7,7 +7,9 @@ import colors from '../../utils/colors';
 const ulStyle = css`
   list-style: none;
   display: flex;
-  justify-content: left;
+  justify-content: space-evenly;
+  align-items: flex-start; // This is needed if it is flex-end and two tags it will misalign in the end
+  align-content: flex-start;
   flex-wrap: wrap;
   margin: auto;
 `;
@@ -19,7 +21,7 @@ const linkStyle = css`
   border-width: thin;
   background-color: ${colors.light};
   border-color: ${colors.light};
-  font-size: 0.7em;
+  font-size: 0.6em;
   a {
     color: ${colors.secondary};
   }
@@ -27,6 +29,7 @@ const linkStyle = css`
 
 const liStyle = css`
   margin-bottom: 0;
+  flex-grow: 1;
   :last-child {
     margin-bottom: 8px;
   }
