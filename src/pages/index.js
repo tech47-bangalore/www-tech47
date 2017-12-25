@@ -162,7 +162,7 @@ export const pageQuery = graphql`
     imageOne: imageSharp(id: { regex: "/cloudseverywhere/" }) {
       sizes {
         # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
-        ...GatsbyImageSharpSizes_withWebp
+        ...GatsbyImageSharpSizes
       }
     }
     tagImage: imageSharp(id: { regex: "/ogtech47/" }) {
