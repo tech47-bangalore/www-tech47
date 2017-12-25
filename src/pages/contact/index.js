@@ -94,7 +94,7 @@ const Contact = ({ data }) => {
 };
 
 export const contactQuery = graphql`
-  query contactQuery {
+  query contactQ {
     markdownRemark(
       fileAbsolutePath: {
         eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/contact/contact.md"
