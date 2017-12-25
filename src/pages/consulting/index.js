@@ -15,7 +15,7 @@ const blogTheme = css`
   }
 `;
 
-const Fullstack = ({ data }) => {
+const Consulting = ({ data }) => {
   const { markdownRemark: remark } = data;
   return (
     <div className={blogTheme}>
@@ -30,7 +30,7 @@ const Fullstack = ({ data }) => {
   );
 };
 
-export const query = graphql`
+export const consultingQuery = graphql`
   query consultingQuery {
     markdownRemark(
       fileAbsolutePath: {
@@ -45,4 +45,4 @@ export const query = graphql`
   }
 `;
 
-export default Fullstack;
+export default Consulting;

@@ -15,7 +15,7 @@ const blogTheme = css`
   }
 `;
 
-const Fullstack = ({ data }) => {
+const Development = ({ data }) => {
   const { markdownRemark: remark } = data;
   return (
     <div className={blogTheme}>
@@ -34,7 +34,7 @@ export const developmentQuery = graphql`
   query developmentQuery {
     markdownRemark(
       fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/fullstack/fullstack.md"
+        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/development/fullstack.md"
       }
     ) {
       html
@@ -45,4 +45,4 @@ export const developmentQuery = graphql`
   }
 `;
 
-export default Fullstack;
+export default Development;

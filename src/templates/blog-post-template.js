@@ -144,7 +144,7 @@ const Template = ({ data, pathContext }) => {
   );
 };
 
-export const pageQuery = graphql`
+export const blogPostQuery = graphql`
   query BlogPostByPath($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html

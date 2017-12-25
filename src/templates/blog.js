@@ -174,7 +174,7 @@ const BlogIndex = ({ data, pathContext }) => {
   );
 };
 
-export const homeQuery = graphql`
+export const blogQuery = graphql`
   query BlogQuery {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
