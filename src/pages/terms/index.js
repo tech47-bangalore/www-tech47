@@ -21,11 +21,7 @@ const Terms = ({ data }) => {
 
 export const termsQuery = graphql`
   query termsQuery {
-    markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/terms/terms.md"
-      }
-    ) {
+    markdownRemark(fileAbsolutePath: { regex: "src/pages/terms/terms.md/" }) {
       html
       frontmatter {
         title

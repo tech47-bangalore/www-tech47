@@ -32,11 +32,7 @@ const AWS = ({ data }) => {
 
 export const awsQuery = graphql`
   query awsQuery {
-    markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/aws/aws.md"
-      }
-    ) {
+    markdownRemark(fileAbsolutePath: { regex: "src/pages/aws/aws.md/" }) {
       html
       frontmatter {
         title

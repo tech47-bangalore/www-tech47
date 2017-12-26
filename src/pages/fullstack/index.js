@@ -33,9 +33,7 @@ const Fullstack = ({ data }) => {
 export const fullstackQuery = graphql`
   query fullstackQuery {
     markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/fullstack/fullstack.md"
-      }
+      fileAbsolutePath: { regex: "src/pages/fullstack/fullstack.md/" }
     ) {
       html
       frontmatter {

@@ -33,9 +33,7 @@ const Development = ({ data }) => {
 export const developmentQuery = graphql`
   query developmentQuery {
     markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/development/fullstack.md"
-      }
+      fileAbsolutePath: { regex: "src/pages/development/fullstack.md/" }
     ) {
       html
       frontmatter {

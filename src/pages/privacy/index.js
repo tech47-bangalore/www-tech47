@@ -22,9 +22,7 @@ const Privacy = ({ data }) => {
 export const privacyQuery = graphql`
   query privacyQuery {
     markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/privacy/privacy.md"
-      }
+      fileAbsolutePath: { regex: "src/pages/privacy/privacy.md/" }
     ) {
       html
       frontmatter {

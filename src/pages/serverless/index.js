@@ -33,9 +33,7 @@ const ServerLess = ({ data }) => {
 export const serverlessQuery = graphql`
   query serverlessQuery {
     markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/serverless/serverless.md"
-      }
+      fileAbsolutePath: { regex: "src/pages/serverless/serverless.md/" }
     ) {
       html
       frontmatter {

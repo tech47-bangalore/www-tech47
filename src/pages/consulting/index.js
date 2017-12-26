@@ -33,9 +33,7 @@ const Consulting = ({ data }) => {
 export const consultingQuery = graphql`
   query consultingQuery {
     markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/consulting/consulting.md"
-      }
+      fileAbsolutePath: { regex: "src/pages/consulting/consulting.md/" }
     ) {
       html
       frontmatter {

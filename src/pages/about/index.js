@@ -32,11 +32,7 @@ const About = ({ data }) => {
 
 export const aboutQuery = graphql`
   query aboutQuery {
-    markdownRemark(
-      fileAbsolutePath: {
-        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/about/about.md"
-      }
-    ) {
+    markdownRemark(fileAbsolutePath: { regex: "src/pages/about/about.md/" }) {
       html
       frontmatter {
         title
