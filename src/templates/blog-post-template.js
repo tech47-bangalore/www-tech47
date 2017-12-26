@@ -48,10 +48,15 @@ const Template = ({ data, pathContext }) => {
   const { markdownRemark: post } = data;
   const { next, prev, slug } = pathContext;
   const { frontmatter } = post;
-  const keywords = frontmatter.tags.reduce((x, y) => `${x}, ${y}`);
+  let keywords = '';
+  if (frontmatter.tags !== null && frontmatter.tags.length > 0) {
+    keywords = frontmatter.tags.reduce((x, y) => `${x}, ${y}`);
+  }
   const tagurl = `https://www.tech47.in${slug}`;
-  const tagimage = `https://www.tech47.in${frontmatter.image.childImageSharp
-    .resize.src}`;
+  const tagimage =
+    frontmatter.image != null
+      ? `https://www.tech47.in${frontmatter.image.childImageSharp.resize.src}`
+      : null;
 
   return (
     <div>
@@ -83,7 +88,9 @@ const Template = ({ data, pathContext }) => {
             <meta name="twitter:image" content={tagimage} />
           </Helmet>
           <h1>{post.frontmatter.title}</h1>
-          <Styledp>Written by {post.frontmatter.author.id}</Styledp>
+          {post.frontmatter.author ? (
+            <Styledp>Written by {post.frontmatter.author.id}</Styledp>
+          ) : null}
           <Styledp>{post.timeToRead} min read &middot;</Styledp>
           <div
             css="text-align: left;"
@@ -114,26 +121,28 @@ const Template = ({ data, pathContext }) => {
           </div>
           <div css="border-top: solid; border-width: thin; margin: 16px; padding: 16px;">
             {data.allAuthorsYaml.edges.map((author, index) => {
-              if (author.node.id === post.frontmatter.author.id) {
-                return (
-                  <div css="display: flex; justify-content: left;">
-                    <Img
-                      css="border-radius: 100%;"
-                      resolutions={
-                        author.node.avatar.childImageSharp.resolutions
-                      }
-                      key={author.node.id}
-                    />
-                    <div css="display: flex; padding: 16px; flex-grow: 1; align-items: center;">
-                      <span>
-                        <strong>
-                          {author.node.id} {` `}
-                        </strong>
-                        <p> {author.node.bio} </p>
-                      </span>
+              if (post.frontmatter.author) {
+                if (author.node.id === post.frontmatter.author.id) {
+                  return (
+                    <div css="display: flex; justify-content: left;">
+                      <Img
+                        css="border-radius: 100%;"
+                        resolutions={
+                          author.node.avatar.childImageSharp.resolutions
+                        }
+                        key={author.node.id}
+                      />
+                      <div css="display: flex; padding: 16px; flex-grow: 1; align-items: center;">
+                        <span>
+                          <strong>
+                            {author.node.id} {` `}
+                          </strong>
+                          <p> {author.node.bio} </p>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                );
+                  );
+                }
               }
               return null;
             })}

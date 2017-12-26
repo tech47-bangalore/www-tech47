@@ -207,6 +207,16 @@ export const blogQuery = graphql`
         src
       }
     }
+    markdownRemark(
+      fileAbsolutePath: {
+        eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/contact/contact.md"
+      }
+    ) {
+      html
+      frontmatter {
+        title
+      }
+    }
   }
 `;
 /* eslint-enable */
