@@ -100,6 +100,7 @@ export const contactQuery = graphql`
         eq: "/Users/jai/work/guides/consulting/epiphany-consulting/src/pages/contact/contact.md"
       }
     ) {
+      id
       html
       frontmatter {
         title
