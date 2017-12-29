@@ -65,10 +65,13 @@ const Template = ({ data, pathContext }) => {
         <Box css="margin: auto 16px auto 16px;">
           <Helmet>
             <title> {`Tech47 - ${post.title}`} </title>
-            <meta name="description" content={post.description} />
+            <meta name="description" content={post.description.description} />
             <meta name="Keywords" content={keywords} />
             <meta property="og:title" content={post.title} />
-            <meta property="og:description" content={post.description} />
+            <meta
+              property="og:description"
+              content={post.description.description}
+            />
             <meta property="og:url" content={tagurl} />
             <meta property="og:image" content={tagimage} />
             <meta
@@ -79,7 +82,10 @@ const Template = ({ data, pathContext }) => {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={post.title} />
             <meta name="twitter:url" content={tagurl} />
-            <meta name="twitter:description" content={post.description} />
+            <meta
+              name="twitter:description"
+              content={post.description.description}
+            />
             <meta name="twitter:image" content={tagimage} />
             <script>
               {`
@@ -167,6 +173,7 @@ export const contentfulPostQuery = graphql`
           tags
           description {
             id
+            description
           }
           createdAt
           blog {

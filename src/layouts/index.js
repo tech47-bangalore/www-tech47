@@ -57,8 +57,8 @@ Layout.propTypes = {
       }).isRequired
     }).isRequired,
     logoImage: PropTypes.shape({
-      resolutions: PropTypes.shape({
-        srcSet: PropTypes.string.isRequired
+      resize: PropTypes.shape({
+        src: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
   }).isRequired

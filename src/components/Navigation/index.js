@@ -421,9 +421,7 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  logo: PropTypes.shape({
-    srcSet: PropTypes.string.isRequired
-  })
+  logo: PropTypes.string.isRequired
 };
 
 Navigation.defaultProps = {
