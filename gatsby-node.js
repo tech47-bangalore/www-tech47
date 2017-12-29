@@ -18,12 +18,19 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;
-  if (node.internal.type === 'MarkdownRemark') {
+  //We check for fileAbsolutePath to skip contentful nodes only nodes on filesystem.
+  if (node.internal.type === 'MarkdownRemark' && node.fileAbsolutePath != null) {
     const fileNode = getNode(node.parent);
-    const parsedFilePath = parseFilepath(fileNode.relativePath);
-
-    const slug = `/${parsedFilePath.dir}`;
-    createNodeField({ node, name: 'slug', value: slug });
+    try {
+      const parsedFilePath = parseFilepath(fileNode.relativePath);
+      if (parsedFilePath !== 'undefined') {
+        const slug = `/${parsedFilePath.dir}`;
+        createNodeField({ node, name: 'slug', value: slug });
+      }
+    } catch(error) {
+      console.log("caught an Error!!!", error);
+    }
+    //Below check is needed for contentful. else it errors.
   }
 };
 
@@ -34,8 +41,8 @@ const createTagPages = (createPage, edges) => {
 
   edges
     .forEach(({ node }) => {
-      if (node.frontmatter.tags) {
-        node.frontmatter.tags
+      if (node.tags) {
+        node.tags
           .forEach(tag => {
             if (!posts[tag]) {
               posts[tag] = [];
@@ -67,75 +74,80 @@ const createTagPages = (createPage, edges) => {
       })
     });
 }
-
+// image dimensions 268 * 0.75 = 201
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
   return new Promise((resolve, reject) => {
-    const blogPostTemplate = path.resolve(
-      'src/templates/blog-post-template.js'
+
+    const contentfulPostTemplate = path.resolve(
+      'src/templates/contentful-post-template.js'
     );
     resolve(
       graphql(
         `
           {
-            allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, filter: {fields: {slug: {regex: "/blog/" }}}) {
-              edges {
-                node {
-                  id
-                  excerpt(pruneLength: 200)
-                  timeToRead
-                  frontmatter {
-                    title
-                    tags
-                    date(formatString: "MMMM DD, YYYY")
-                    imgdesc
-                    image {
-                      childImageSharp {
-                        resize(width: 300, height: 200, cropFocus: ENTROPY) {
-                          src
-                        }
-                      }
-                    }
-                  }
-                  fields {
-                    slug
-                  }
-                }
-              }
+            allContentfulBlogPost {
+               edges {
+                 node {
+                   id
+                   title
+                   tags
+                   slug
+                   createdAt
+                   description {
+                     id
+                   }
+                   blog {
+                     childMarkdownRemark {
+                       timeToRead
+                       excerpt(pruneLength: 200)
+                     }
+                   }
+                   featuredImage {
+                     title
+                     resolutions(width: 268, height: 201, cropFocus: FACES) {
+                       width
+                       height
+                       src
+                       srcSet
+                     }
+                   }
+                 }
+               }
             }
           }
         `
-      ).then(result => {
-        if (result.error) {
-          reject(result.error);
+      ).then(contentful => {
+          if (contentful.error) {
+            reject(contentful.error);
+          }
+          const contentfulposts = contentful.data.allContentfulBlogPost.edges;
+          createTagPages(createPage, contentfulposts);
+
+          contentfulposts.forEach((post, index) => {
+
+            createPaginatedPages({
+              edges: contentfulposts,
+              createPage: createPage,
+              pageTemplate: "src/templates/blogcontentful.js",
+              pageLength: 10,
+              pathPrefix: "blog"
+            });
+
+            const prev = index === 0 ? false : contentfulposts[index - 1].node;
+            const next = index === contentfulposts.length - 1 ? false : contentfulposts[index + 1].node;
+            createPage({
+              path: `${post.node.slug}`,
+              component: slash(contentfulPostTemplate),
+              context: {
+                slug: post.node.slug,
+                prev: prev,
+                next: next
+              }
+            });
+          });
         }
-
-        const posts = result.data.allMarkdownRemark.edges;
-        createTagPages(createPage, posts);
-
-        posts.forEach((post, index) => {
-
-          createPaginatedPages({
-            edges: posts,
-            createPage: createPage,
-            pageTemplate: "src/templates/blog.js",
-            pageLength: 10,
-            pathPrefix: "blog"
-          });
-
-          const prev = index === 0 ? false : posts[index - 1].node;
-          const next = index === posts.length - 1 ? false : posts[index + 1].node;
-          createPage({
-            path: `${post.node.fields.slug}`,
-            component: slash(blogPostTemplate),
-            context: {
-              slug: post.node.fields.slug,
-              prev: prev,
-              next: next
-            }
-          });
-        });
-      })
+      )
     );
   });
 };

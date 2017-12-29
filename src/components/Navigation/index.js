@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import Img from 'gatsby-image';
 import feather from '../../utils/feather';
 import colors from '../../utils/colors';
 import MobileNav from './mobile';
@@ -365,7 +363,6 @@ class Navigation extends Component {
   }
 
   render() {
-    console.log(' the props in navigation are: ', this.props);
     return (
       <nav>
         <Box className={desktopNav}>

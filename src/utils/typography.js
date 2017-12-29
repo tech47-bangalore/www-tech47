@@ -9,11 +9,12 @@ fairyGatesTheme.overrideStyles = () => ({
 });
 // We delete the google fonts property as it inserts a async call in the head of index.html
 // We have type face which installs google fonts for us.
-delete fairyGatesTheme.googleFonts;
 
 const typography = new Typography(fairyGatesTheme);
 
 if (process.env.NODE_ENV !== `production`) {
+  // Delete the googlefonts object, we need it in dev as we get a CORS error while downloading the font locally.
+  delete fairyGatesTheme.googleFonts;
   typography.injectStyles();
 }
 

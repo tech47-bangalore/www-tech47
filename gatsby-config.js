@@ -42,6 +42,13 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `ojam5vx77jn8`,
+        accessToken: `a4830ccca819dd0e79dfdef8e7719e8c8f9f0df9d181163bd9d3476034c414de`
+      }
+    },
+    {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
@@ -50,8 +57,11 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              linkImagesToOriginal: false,
-            },
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 800
+            }
           },
         ],
       },
@@ -71,7 +81,6 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-twitter',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-react-next'
   ]

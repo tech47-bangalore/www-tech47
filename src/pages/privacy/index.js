@@ -5,7 +5,6 @@ import colors from '../../utils/colors';
 
 const Privacy = ({ data }) => {
   const { markdownRemark: remark } = data;
-  console.log(data);
   return (
     <Box bg={colors.primary}>
       <Box css="margin: 2.5em">

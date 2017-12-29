@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import Link from 'gatsby-link';
+import Img from 'gatsby-image';
 import { Box, Flex, Tags } from '../components/Layout';
 import colors from '../utils/colors';
 
@@ -10,20 +11,6 @@ const listStyle = css`
   margin: 0;
   margin-top: 1.5em;
   padding: 0;
-`;
-
-const blogTheme = css`
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${colors.secondary};
-  }
-  p {
-    color: ${colors.sixth};
-  }
 `;
 
 const tagStyle = css`
@@ -51,7 +38,7 @@ const excerptStyle = css`
 const BlogCard = styled.div`
   position: relative;
   width: 300px;
-  height: 400px;
+  height: 440px;
   margin: 16px;
   padding 16px;
   overflow: hidden;
@@ -89,7 +76,6 @@ NavLink.propTypes = {
   url: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
 };
-
 const StyledSpan = styled.span`
   color: ${colors.light};
   font-size: 0.65em;
@@ -105,26 +91,27 @@ export default function TagsPage({ pathContext }) {
         </h3>
         <ul className={listStyle}>
           <Flex>
-            {post.map(({ id, frontmatter, excerpt, fields }) => {
-              const image = frontmatter.image
-                ? frontmatter.image.childImageSharp.resize.src
-                : null;
+            {post.map(({ id, title, tags, featuredImage, slug, blog }) => {
+              const image = featuredImage ? featuredImage.resolutions : null;
               return (
                 <li key={id}>
-                  <BlogCard image={frontmatter.image}>
-                    <h4>
-                      <Link to={fields.slug}>{frontmatter.title}</Link>
-                    </h4>
-                    {image ? (
-                      <img src={image} alt={frontmatter.imgdesc} />
-                    ) : null}
-                    <Link to={fields.slug}>
+                  <BlogCard image={featuredImage}>
+                    <Link to={slug}>
+                      <h4>{title}</h4>
+                      {image ? (
+                        <Img alt={featuredImage.title} resolutions={image} />
+                      ) : null}
+                    </Link>
+                    <StyledSpan>
+                      {blog.childMarkdownRemark.timeToRead} min read &middot;
+                    </StyledSpan>
+                    <Link to={slug}>
                       <div className={excerptStyle}>
-                        <p>{excerpt}</p>
+                        <p>{blog.childMarkdownRemark.excerpt}</p>
                       </div>
                     </Link>
                     <div className={tagStyle}>
-                      <Tags list={frontmatter.tags || []} />
+                      <Tags list={tags || []} />
                     </div>
                   </BlogCard>
                 </li>
@@ -159,12 +146,16 @@ TagsPage.propTypes = {
 
     post: PropTypes.arrayOf(
       PropTypes.shape({
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+        title: PropTypes.string.isRequired,
+        featuredImage: PropTypes.shape({
+          resize: PropTypes.shape({
+            src: PropTypes.string.isRequired
+          }).isRequired,
+          description: PropTypes.string.isRequired
+        }).isRequired,
         fields: PropTypes.shape({
           slug: PropTypes.string.isRequired
-        }).isRequired,
-        frontmatter: PropTypes.shape({
-          tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-          title: PropTypes.string.isRequired
         }).isRequired
       })
     ).isRequired,

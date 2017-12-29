@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import colors from '../../utils/colors';
 import close from './x-circle.svg';
-
-// Brand Style
-const brandStyle = css`
-  color: ${colors.third};
-  font-size: 1.5em;
-  margin: auto;
-  text-align: center;
-`;
 
 const deleteStyle = css`
   text-align: right;
