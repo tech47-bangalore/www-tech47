@@ -113,6 +113,7 @@ const Template = ({ data, pathContext }) => {
               sizes={post.featuredImage.sizes}
             />
           ) : null}
+          <div css="padding-bottom: 32px;" />
           <div
             css="text-align: left;"
             dangerouslySetInnerHTML={{ __html: html }}
