@@ -10,21 +10,31 @@ import { Box } from '../../components/Layout';
 import menusvg from './align-right.svg';
 
 const svgStyles = css`
-  opacity: 0.5;
+  color: ${colors.primary};
   transition: opacity 0.15s ease-in;
   transition: color 0.15s ease-in;
 
   &:hover {
     text-decoration: none;
     box-shadow: none;
-    opacity: 1;
-    transition: opacity 0.15s ease-in;
+    color: ${colors.fifth};
+    transition: background-color 0.15s ease-in;
+  }
+`;
+
+const outerstyle = css`
+  background-color: #efefef;
+  padding: 5px 10px 0px 10px;
+  border-radius: 50%;
+  &:hover {
+    background-color: ${colors.primary};
+    transition: background-color 0.15s ease-in;
   }
 `;
 
 const menuConfig = [
   {
-    title: feather('github', ['30', '30'], svgStyles),
+    title: feather('github', ['30', '30'], svgStyles, outerstyle),
     url: '',
     href: 'https://github.com/Jaikant/tech47',
     submenu: false

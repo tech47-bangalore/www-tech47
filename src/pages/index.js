@@ -96,7 +96,7 @@ export default ({ data }) => {
         <meta name="twitter:image" content={tagimage} />
       </Helmet>
       <div className={bgImageDiv}>
-        <Img sizes={imageOne.sizes} alt="AWS Cloud, Serverless, Reactjs" />
+        {/* <Img sizes={imageOne.sizes} alt="AWS Cloud, Serverless, Reactjs" /> */}
       </div>
       <Box>
         <H1>{myData.heading}</H1>
@@ -136,10 +136,10 @@ export default ({ data }) => {
         style={{
           paddingTop: '32px',
           paddingBottom: '32px',
-          backgroundColor: '#02577a'
+          backgroundColor: '#01303f'
         }}
       >
-        <h1>Technologies we love</h1>
+        <h1 style={{color: '#ffffff'}}>Technologies we love</h1>
         <Logos />
       </Box>
     </div>

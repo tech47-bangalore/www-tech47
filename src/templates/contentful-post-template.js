@@ -4,13 +4,25 @@ import styled, { css } from 'react-emotion';
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
+import { rhythm, scale } from '../utils/typography';
 import { Box, Tags } from '../components/Layout';
 import colors from '../utils/colors';
+import presets from '../utils/presets';
 import feather from '../utils/feather';
+import EmailCaptureForm from "../components/Layout/email-capture-form"
 
 const blogTheme = css`
+  margin-top: ${rhythm(4)};
+  margin-bottom: ${rhythm(2)};
+  ${presets.Mobile} {
+     margin-right: ${rhythm(1 / 2)};
+     margin-left: ${rhythm(1 / 2)};
+  };
+  ${presets.Tablet} {
+     margin-right: auto;
+     margin-left: auto;
+  };
   max-width: 900px;
-  margin: 4.5rem auto 4.5rem auto;
   p {
     color: ${colors.sixth};
   }
@@ -23,6 +35,24 @@ const blogTheme = css`
       color: ${colors.linkvisited};
     }
   }
+`;
+
+const prevNextLabelStyles = css`
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: ${rhythm(1)};
+  margin-right: ${rhythm(1)};
+  color: ${colors.gray.calm};
+  font-weight: normal;
+  ${scale(-0.5)};
+  line-height: 1;
+`;
+
+
+
+const outerStyles = css`
+  display: inline-block;
+  vertical-align: middle;
 `;
 
 const svgStyles = css`
@@ -44,6 +74,50 @@ const Styledp = styled.p`
   color: ${colors.light};
 `;
 
+const AuthorInfo = ({ post }) =>  (
+   <div css={`
+          border-top: solid; 
+          border-width: thin; 
+          margin: ${ rhythm(1) }; 
+          padding: ${ rhythm(1) };
+        `}
+   >
+      <div css={`
+             display: flex; 
+             ${presets.Mobile} {
+               justify-content: center;
+               flex-direction: column;
+             };
+             ${presets.Tablet} {
+               justify-content: left;
+               flex-direction: row;
+             };
+           `}
+      >
+        <Img
+          css="border-radius: 100%;"
+          alt={post.author.profilePicture.title}
+          resolutions={post.author.profilePicture.resolutions}
+        />
+        <div css={`
+               display: flex; 
+               padding: ${ rhythm(1) }; 
+               flex-grow: 1; 
+               align-items: center;
+               `}
+        >
+          <span>
+            <strong>
+              {post.author.name} {` `}
+            </strong>
+            <p> {post.author.authorBio} </p>
+          </span>
+        </div>
+      </div>
+   </div>
+  );
+
+
 const Template = ({ data, pathContext }) => {
   const { node: post } = data.allContentfulBlogPost.edges[0];
   const { timeToRead, html } = post.blog.childMarkdownRemark;
@@ -61,8 +135,6 @@ const Template = ({ data, pathContext }) => {
 
   return (
     <div>
-      <div className={blogTheme}>
-        <Box css="margin: auto 16px auto 16px;">
           <Helmet>
             <title> {`Tech47 - ${post.title}`} </title>
             <meta name="description" content={post.description.description} />
@@ -102,6 +174,8 @@ const Template = ({ data, pathContext }) => {
               `}
             </script>
           </Helmet>
+      <div className={blogTheme}>
+        <Box>
           <h1>{post.title}</h1>
           {post.author ? (
             <Styledp>Written by {post.author.name}</Styledp>
@@ -118,44 +192,44 @@ const Template = ({ data, pathContext }) => {
             css="text-align: left;"
             dangerouslySetInnerHTML={{ __html: html }}
           />
-          <div css="display: flex; justify-content: center;">
+          <div css={`
+                 display: flex; 
+                 justify-content: center;
+                 margin-bottom: ${ rhythm(1) }
+               `}
+          >
             <Tags list={post.tags || []} />
           </div>
-          <div css="display: flex; flex: flex-grow; align-items: center;">
+          <EmailCaptureForm />
+          <AuthorInfo post={post} />
+          <div css="display: flex; width: 100%;">
+            <div css="width: 50%; text-align: left;">
             {prev && (
+              <span>
+              <h4 className={prevNextLabelStyles}>Previous</h4>
               <Link
                 to={prev.slug}
-                css="display: flex; flex-grow: 1; font-size: 0.8em;"
+                css="width: 50%; text-align: left; font-size: 0.8em; font-weight: 700;"
               >
-                {feather('chevron-left', ['30', '30'], svgStyles)}
+                {feather('chevron-left', ['30', '30'], svgStyles, outerStyles)}
                 {prev.title}
               </Link>
+              </span>
             )}
+            </div>
+            <div css="width: 50%; text-align: right;">
             {next && (
+              <span>
+              <h4 className={prevNextLabelStyles}>Next</h4>
               <Link
                 to={next.slug}
-                css="display: flex; align-self: flex-end; font-size: 0.8em;"
+                css="width: 50%; text-align: right; font-size: 0.8em; font-weight: 700;"
               >
                 {next.title}
-                {feather('chevron-right', ['30', '30'], svgStyles)}
+                {feather('chevron-right', ['30', '30'], svgStyles, outerStyles)}
               </Link>
+              </span>
             )}
-          </div>
-          <div css="border-top: solid; border-width: thin; margin: 16px; padding: 16px;">
-            <div css="display: flex; justify-content: left;">
-              <Img
-                css="border-radius: 100%;"
-                alt={post.author.profilePicture.title}
-                resolutions={post.author.profilePicture.resolutions}
-              />
-              <div css="display: flex; padding: 16px; flex-grow: 1; align-items: center;">
-                <span>
-                  <strong>
-                    {post.author.name} {` `}
-                  </strong>
-                  <p> {post.author.authorBio} </p>
-                </span>
-              </div>
             </div>
           </div>
         </Box>

@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "email-validator": "^1.1.1",
     "emotion": "^8.0.8",
     "emotion-server": "^8.0.8",
     "emotion-theming": "^8.0.11",
@@ -30,6 +31,9 @@
     "gatsby-transformer-remark": "^1.7.17",
     "gatsby-transformer-sharp": "^1.6.10",
     "gatsby-transformer-yaml": "^1.5.11",
+    "gray-percentage": "^2.0.0",
+    "hex2rgba": "0.0.1",
+    "jsonp": "^0.2.1",
     "prop-types": "^15.6.0",
     "react-emotion": "^8.0.8",
     "styled-system": "^1.0.8",
@@ -68,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-to-json": "^3.1.4",
