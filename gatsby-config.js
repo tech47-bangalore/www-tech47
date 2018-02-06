@@ -54,6 +54,7 @@ module.exports = {
         plugins: [
           'gatsby-remark-autolink-headers',
           'gatsby-remark-smartypants',
+          'gatsby-remark-prismjs',
           {
             resolve: `gatsby-remark-images`,
             options: {

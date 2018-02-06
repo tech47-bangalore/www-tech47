@@ -8,6 +8,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import colors from '../utils/colors';
 import favicon from '../assets/images/tech47-favicon2.png';
+import "../css/prism.css"
 
 /* eslint-disable */
 //import normalize from 'normalize.css';
@@ -29,7 +30,7 @@ injectGlobal`
   h1, h2, h3, h4, h5, h6 {
     color: ${colors.secondary}
   };
-`;
+`; 
 /* eslint-enable */
 const MainDiv = styled.div`
   width: 100%;
