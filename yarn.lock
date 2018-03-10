@@ -10944,9 +10944,9 @@ typeface-quattrocento-sans@0.0.44:
   version "0.0.44"
   resolved "https://registry.yarnpkg.com/typeface-quattrocento-sans/-/typeface-quattrocento-sans-0.0.44.tgz#40efbf9564dd612c9c8c5876ec99f9e9e5a3fdcb"
 
-typeface-work-sans@0.0.44:
-  version "0.0.44"
-  resolved "https://registry.yarnpkg.com/typeface-work-sans/-/typeface-work-sans-0.0.44.tgz#c01dbe696d91d1f2acc5fca70cd21c87422f762c"
+typeface-work-sans@0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-work-sans/-/typeface-work-sans-0.0.54.tgz#1bf57d6a2c7dfa6f820adbe12d8c2291835f07c4"
 
 typography-breakpoint-constants@^0.15.10:
   version "0.15.10"
