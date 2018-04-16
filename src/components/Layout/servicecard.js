@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled, { css, keyframes } from 'react-emotion';
 import Link from 'gatsby-link';
 import colors from '../../utils/colors';
 import ButtonPrimary from '../../components/Buttons';
@@ -12,7 +12,6 @@ export const Flex = styled.div`
 `;
 
 const hoverStyle = css`
-  display: none;
   position: absolute;
   width: 320px;
   height: 320px;
@@ -20,11 +19,18 @@ const hoverStyle = css`
   text-align: center;
   vertical-align: middle;
   color: ${colors.fifth};
+  border-radius: 5px;
   z-index: 8;
-  background-color: ${colors.primary};
-  opacity: 0.9;
+  opacity: 0;
+  background-color: ${colors.third};
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  &:hover {
+    opacity: 1;
+  }
 `;
-
 // This wrapper gives the nice looking border of the same color as the background
 const wrapperOne = css`
   padding: 8px;
@@ -37,9 +43,15 @@ const wrapperOne = css`
 const wrapperTwo = css`
   height: 320px;
   width: 320px;
+  background-color: ${colors.third};
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
 
   &:hover {
     & .${hoverStyle} {
+      background-color: ${colors.light};
       display: table;
     }
   }
@@ -62,6 +74,13 @@ const imgWrapper = css`
   padding: 8px;
 `;
 
+export const H3 = styled.h3`
+   -webkit-box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
+   -moz-box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
+   box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
+`;
+
+
 const ServiceCard = ({ name, image, service, urltext, url }) => (
   <div className={wrapperOne}>
     <div className={wrapperTwo}>
@@ -70,13 +89,13 @@ const ServiceCard = ({ name, image, service, urltext, url }) => (
           <img src={image} height="200" width="200" alt="Logo" />
         </div>
         <div
-          css={`width: 100%; background-color: ${colors.primary}; position: absolute;`}
+          css={`width: 100%; background-color: ${colors.fifth}; position: absolute;`}
         >
-          <h3
-            css={`display: block; margin-top: 0; padding: 15px; color: ${colors.fifth};`}
+          <H3
+            css={`display: block; margin-top: 0; padding: 15px; color: ${colors.secondary};`}
           >
             {name}
-          </h3>
+          </H3>
         </div>
       </div>
       <div className={hoverStyle}>

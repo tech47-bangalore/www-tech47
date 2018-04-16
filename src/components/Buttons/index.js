@@ -5,13 +5,13 @@ const buttonBasic = css`
   width: 100%;
   padding: 0.5rem 1.25rem;
   border-radius: 5px;
-  border: 2px solid ${colors.primary};
+  border: 2px solid ${colors.third};
 `;
 
 const buttonPrimary = css`
   ${buttonBasic};
-  background-color: ${colors.fifth};
-  color: ${colors.primary};
+  background-color: ${colors.light};
+  color: ${colors.third};
   transition: all 0.3s ease;
 
   &:hover {

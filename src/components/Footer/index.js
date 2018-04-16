@@ -8,7 +8,7 @@ import media from '../../utils/media';
 
 const footerStyle = css`
   overflow: hidden;
-  background-color: ${colors.third};
+  background-color: ${colors.primary};
   color: ${colors.light};
   text-align: center;
   opacity: 0.99; // We need this for iPad pro when bg pictures starts covering footer.

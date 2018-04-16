@@ -288,14 +288,14 @@ const basicNav = css`
   top: 0;
   align-items: center;
   letter-spacing: 0.1em;
-  color: ${colors.third};
+  color: ${colors.primary};
   background-color: ${colors.fifth};
   margin: 0;
   width: 100%;
   list-style-type: none;
-  -webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 1);
-  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
+  -moz-box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
+  box-shadow: 0px 0px 1px 0px ${colors.gray.calm};
   z-index: 9998;
   height: 3.5rem;
 `;

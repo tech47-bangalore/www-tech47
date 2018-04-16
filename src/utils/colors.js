@@ -66,7 +66,7 @@ const colors = {
   warning: `#ec1818`,
   primary: '#0f0f0f',
   secondary: '#000000',
-  third: '#01303f',
+  third: '#ffffff',
   fourth: '#0f0f0f',
   fifth: '#FFFFFF', // For front page - Navigation, Service cards
   sixth: '#0f0f0f',

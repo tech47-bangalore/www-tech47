@@ -54,7 +54,7 @@ export default ({ data }) => {
   const myData = data.allContentJson.edges[0].node.index;
   const tagimage = `https://www.tech47.in${data.tagImage.resize.src}`;
   return (
-    <div css={`background-color: ${colors.accent};`}>
+    <div css={`background-color: ${colors.fifth};`}>
       <Helmet>
         <title> {`Tech47 - Technology to power your startup`} </title>
         <meta
@@ -100,6 +100,7 @@ export default ({ data }) => {
       </div>
       <Box>
         <H1>{myData.heading}</H1>
+        <div css="padding-bottom: 2.5em;" />
         <Flex>
           <ul className={imgStyle}>
             <li>
@@ -136,7 +137,7 @@ export default ({ data }) => {
         style={{
           paddingTop: '32px',
           paddingBottom: '32px',
-          backgroundColor: '#01303f'
+          backgroundColor: `${colors.fifth}`,
         }}
       >
         <h1 style={{color: '#ffffff'}}>Technologies we love</h1>
