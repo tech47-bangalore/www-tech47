@@ -34,12 +34,6 @@ const outerstyle = css`
 
 const menuConfig = [
   {
-    title: feather('github', ['30', '30'], svgStyles, outerstyle),
-    url: '',
-    href: 'https://github.com/Jaikant/tech47',
-    submenu: false
-  },
-  {
     title: 'SERVICES',
     url: [
       { title: 'Serverless Apps', url: '/serverless' },

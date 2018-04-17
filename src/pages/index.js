@@ -1,6 +1,6 @@
 /* eslint-disable no-undef, react/prop-types */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled, { css, keyframes } from 'react-emotion';
 import Img from 'gatsby-image';
 import Helmet from 'react-helmet';
 import { Box, Flex, ServiceCard, Logos } from '../components/Layout';
@@ -10,6 +10,15 @@ import serverless from './images/blackboard.svg';
 import reactsvg from './images/space-ship.svg';
 import media from '../utils/media';
 
+
+const fadeIn = keyframes`
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+`
 const H1 = styled.h1`
   color: #fff;
   line-height: 1em;
@@ -27,6 +36,8 @@ const imgStyle = css`
   display: flex;
   flex-direction: column;
   margin: 0;
+  animation-name: ${fadeIn};
+  animation-duration: 1s;
   ${media.mid`
     flex-direction: row;
   `};
