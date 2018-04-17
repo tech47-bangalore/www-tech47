@@ -8,7 +8,7 @@
     "email-validator": "^1.1.1",
     "emotion": "^8.0.8",
     "emotion-server": "^8.0.8",
-    "emotion-theming": "^8.0.11",
+    "emotion-theming": "^9.0.0",
     "feather-icons": "^3.3.0",
     "gatsby": "^1.9.76",
     "gatsby-image": "^1.0.13",
