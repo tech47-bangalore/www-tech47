@@ -6,7 +6,7 @@ import colors from '../../utils/colors';
 
 const ulStyle = css`
   list-style: none;
-  display: flex;
+  display: inline-flex;
   justify-content: space-evenly;
   align-items: flex-start; // This is needed if it is flex-end and two tags it will misalign in the end
   align-content: flex-start;
@@ -15,16 +15,11 @@ const ulStyle = css`
 `;
 
 const linkStyle = css`
-  margin: 2px;
-  padding: 5px;
-  border-style: solid;
-  border-width: thin;
-  background-color: ${colors.light};
-  border-color: ${colors.light};
-  font-size: 0.6em;
-  a {
-    color: ${colors.secondary};
-  }
+  font-size: 0.8em;
+  color: ${colors.tech47category};
+  &:hover {
+      color: ${colors.tech47categoryhover};
+  };
 `;
 
 const liStyle = css`

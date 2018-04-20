@@ -58,6 +58,17 @@ const colors = {
   // original palette by @SachaG
   // @see https://www.figma.com/file/J6IYJEtdRmwJQOrcZ2DfvxDD/Gatsby
   tech47: `#663399`, // was #744c9e
+  tech47blue: `rgba(74, 62, 255, 1)`,
+  tech47category: `rgba(81, 185, 238)`,
+  tech47categoryhover: `rgba(81, 185, 238, 0.5)`,
+  tech47purple: `rgba(173, 60, 203, 1)`,
+  tech47purplehex: `#ad3ccb`,
+  tech47hover: `rgba(255, 255, 255, 0.5)`,
+  tech47date: `#d1d1d1`,
+  tech47pink: `rgba(252, 56, 167, 1)`,
+  tech47pinkhex: `#FC38A7`,
+  tech47background: `rgba(243, 246, 250)`,
+  tech47white: '#ffffff',
   lilac: `#9D7CBF`,
   // accent color from the "bolder palette" by @ArchieHicklin
   // @see https://github.com/gatsbyjs/gatsby/issues/1173#issuecomment-309415650

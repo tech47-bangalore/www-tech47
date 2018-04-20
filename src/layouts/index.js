@@ -18,6 +18,9 @@ injectGlobal`
       //font: 16px/1.5em "Source Sans Pro",Arial,sans-serif;
       box-sizing: border-box;
   };
+  body {
+    background-color: ${colors.tech47background};
+  };
   a {
     text-decoration: none;
     color: inherit;
@@ -25,7 +28,8 @@ injectGlobal`
   a:hover {
     cursor: pointer;
     text-decoration: none;
-    color: ${colors.primary};
+    color: ${colors.tech47hover};
+    transition: color 0.15s ease-in;
   };
   h1, h2, h3, h4, h5, h6 {
     color: ${colors.secondary}
@@ -37,13 +41,18 @@ const MainDiv = styled.div`
   height: 400px;
 `;
 
-const Layout = ({ children, data }) => (
+const Layout = ({ children, location, data }) => (
   <MainDiv>
     <Helmet>
       <link rel="shortcut icon" href={favicon} type="image/x-icon" />
       <link rel="icon" href={favicon} type="image/x-icon" />
     </Helmet>
-    <Navigation title={data.site.siteMetadata.title} logo={data.logoImage.resize.src}/>
+    <Navigation 
+      title={data.site.siteMetadata.title} 
+      logo={data.logoImage.resize.src}
+      logoWhite={data.logoWhite.resize.src}
+      location={location}
+    />
     {children()}
     <Footer title={data.site.siteMetadata.title} />
   </MainDiv>
@@ -51,6 +60,7 @@ const Layout = ({ children, data }) => (
 
 Layout.propTypes = {
   children: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired,
   data: PropTypes.shape({
     site: PropTypes.shape({
       siteMetadata: PropTypes.shape({
@@ -75,6 +85,12 @@ export const query = graphql`
       }
     }
     logoImage: imageSharp(id: { regex: "/Htech47/" }) {
+      resize(width: 1843, height: 425, cropFocus: CENTER) {
+        # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
+        src
+      }
+    }
+    logoWhite: imageSharp(id: { regex: "/Htech47-white/" }) {
       resize(width: 1843, height: 425, cropFocus: CENTER) {
         # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
         src

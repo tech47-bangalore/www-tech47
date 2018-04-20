@@ -8,7 +8,7 @@ import media from '../../utils/media';
 
 const footerStyle = css`
   overflow: hidden;
-  background-color: ${colors.primary};
+  background-color: ${colors.tech47blue};
   color: ${colors.light};
   text-align: center;
   opacity: 0.99; // We need this for iPad pro when bg pictures starts covering footer.
@@ -20,7 +20,7 @@ const footerStyle = css`
   & a,
   p,
   h3 {
-    color: ${colors.light};
+    color: ${colors.tech47date};
   }
 `;
 
@@ -124,82 +124,10 @@ const Wrapper = styled.div`
 
 const Footer = props => (
   <div>
-    <div className={box}>
-      <Flex>
-        <div className={box1}>
-          <Wrapper>
-            <div
-              css={`
-                @media (min-width: 1200px) {
-                float: left;
-              }`}
-            >
-              <h3>{props.title}</h3>
-            </div>
-          </Wrapper>
-        </div>
-        <div className={box1}>
-          <Wrapper>
-            <ul className={ulStyle}>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/privacy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/terms">Terms of Service</Link>
-              </li>
-            </ul>
-          </Wrapper>
-        </div>
-        <div className={box1}>
-          <Wrapper>
-            <ul className={socialList}>
-              <li>
-                <a
-                  title="Link to our Facebook page"
-                  href={props.facebook}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  {feather('facebook', ['30', '30'], svgStyles)}
-                </a>
-              </li>
-              <li>
-                <a
-                  title="Link to our Twitter account"
-                  href={props.twitter}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  {feather('twitter', ['30', '30'], svgStyles)}
-                </a>
-              </li>
-              <li>
-                <a
-                  title="Link to out Instragram account"
-                  href={props.instagram}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  {feather('instagram', ['30', '30'], svgStyles)}
-                </a>
-              </li>
-              <li>
-                <a title="Our E-Mail address" href={`mailto:${props.email}`}>
-                  {feather('mail', ['30', '30'], svgStyles)}
-                </a>
-              </li>
-            </ul>
-          </Wrapper>
-        </div>
-      </Flex>
-    </div>
     <div
       css={`
            ${box};
-           text-align: center;
+           text-align: left;
            @media (min-width: 300px) {
              padding: 8px 0px;
            }
@@ -210,30 +138,28 @@ const Footer = props => (
              padding: 32px 0px;
            }
            & p {
-             margin: auto;
-             opacity: 0.5;
+             ${media.mobile`
+               text-align: center;
+               margin: 32px;
+             `};
+             ${media.tablet`
+               text-align: left;
+               margin: 0px 16px;
+             `};
            }
            `}
     >
-      <p>{`Copyright © 2017 ${props.title}. All rights reserved.`}</p>
+      <p>{`Copyright © 2018 ${props.title}.`}</p>
     </div>
   </div>
 );
 
 Footer.propTypes = {
   title: PropTypes.string,
-  facebook: PropTypes.string,
-  twitter: PropTypes.string,
-  instagram: PropTypes.string,
-  email: PropTypes.string
 };
 
 Footer.defaultProps = {
   title: 'Tech47',
-  facebook: 'https://www.facebook.com/jaikant.kumaran',
-  twitter: 'https://twitter.com/jaikantkumaran',
-  instagram: 'https://www.instagram.com/jaikanth77/',
-  email: 'jaikant@gmail.com'
 };
 
 export default Footer;

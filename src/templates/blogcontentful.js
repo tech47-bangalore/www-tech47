@@ -2,17 +2,11 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
-import { Box, Flex, Tags } from '../components/Layout';
-import Img from 'gatsby-image';
+import Typist from 'react-typist';
+import { Box, Flex, Tags, BlogPosts, SideBar } from '../components/Layout';
+import FaHeart from 'react-icons/lib/fa/heart';
 import colors from '../utils/colors';
 import styled, { css } from 'react-emotion';
-
-const listStyle = css`
-  list-style-type: none;
-  margin: 0;
-  margin-top: 1.5em;
-  padding: 0;
-`;
 
 const blogTheme = css`
   h1, h2, h3, h4, h5, h6 {
@@ -23,63 +17,10 @@ const blogTheme = css`
   };
 `;
 
-const tagStyle = css`
-  margin: 8px;
-  bottom: 0;
-`;
-
-const excerptStyle = css`
-  & :after {
-    content: "";
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 70%;
-    height: 1.5em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
-  }
-`;
-
-const BlogCard = styled.div`
-  position: relative;
-  width: 300px;
-  height: 440px;
-  margin: 16px;
-  padding 16px;
-  overflow: hidden;
-  text-align: left;
-  border-style: solid;
-  border-width: thin;
-  border-color: ${colors.light}
-
-  img,
-  h4 {
-    margin: auto;
-  }
-
-  .${excerptStyle} {
-    position: relative;
-    height: ${props => props.image ? '4.5em' : 'auto' }; // Sets the div to
-    overflow: hidden;
-  }
-
-  .${tagStyle} {
-    position: absolute;
-    height: auto;
-  }
-`;
-
-const NavLink = props => {
-  if (!props.test) {
-    return <Link to={props.url}>{props.text}</Link>;
-  } else {
-    return null;
-  }
-};
-const StyledSpan = styled.span`
-  color: ${colors.light};
-  font-size: 0.65em;
+const bgColor = css`
+  width: 100%;
+	height: 50vh;
+	background: linear-gradient(${colors.tech47blue}, ${colors.tech47purple});
 `;
 
 const ContentfulBlogIndex = ({ data, pathContext }) => {
@@ -91,9 +32,42 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
   const tagurl = first ? `https://www.tech47.in${pathPrefix}` :
     `https://www.tech47.in${pathPrefix}/${index.toString}`;
   const tagimage = `https://www.tech47.in${data.imageOne.resize.src}`;
+  const cursor = {
+    show: true,
+    blink: true,
+    element: '|',
+    hideWhenDone: true,
+    hideWhenDoneDelay: 1000,
+  }
   return (
     <div>
-      <Box className={blogTheme}>
+      <div className={bgColor}>
+        <div css={`
+             padding-top: 17vh;
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             color: white;
+             font-size: 1.2em;
+          `}>
+          <Typist cursor={cursor}>
+            <span> We love to build the technology that powers your startup. </span>
+            <Typist.Backspace count={58} delay={1000} />
+            <span> We </span>
+            <FaHeart
+              css={css({
+                cursor: `pointer`,
+                fontSize: `1em`,
+                color: `${colors.tech47pink}`,
+                userSelect: `none`,
+              })}
+            />
+            {' '}
+            startups.
+          </Typist>
+        </div>
+      </div>    
+      <div className={blogTheme}>
         <Helmet>
           <title> {`Tech47 - Blogs`} </title>
           <meta
@@ -125,56 +99,11 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
           />
           <meta name="twitter:image" content={tagimage} />
         </Helmet>
-        <ul className={listStyle}>
-          <Box>
-            <h2> People, Technology, Change  </h2>
-            <Flex>
-              {group
-                .filter(post => post.node.title.length > 0)
-                .map(({ node: post }, index) => {
-                  const image = post.featuredImage
-                    ? post.featuredImage.resolutions
-                    : null;
-                  return (
-                    <li key={post.id}>
-                    <BlogCard image={post.featuredImage ? true : false}>
-                      <Link to={post.slug}>
-                        {image ?
-                          <Img
-                            alt={post.featuredImage.title}
-                            resolutions={image}
-                          /> : null }
-                        <h4>
-                          {post.title}
-                        </h4>
-                        <StyledSpan>{post.blog.childMarkdownRemark.timeToRead} min read &middot;</StyledSpan>
-                      </Link>
-                      <Link to={post.slug}>
-                        <div className={excerptStyle}>
-                          <span>{post.blog.childMarkdownRemark.excerpt}</span>
-                        </div>
-                      </Link>
-                      <div className={tagStyle}>
-                        <Tags list={post.tags || []} />
-                      </div>
-                    </BlogCard>
-                    </li>
-                  );
-                })}
-              </Flex>
-          </Box>
-        </ul>
-        <div css="display: flex; justify-content: center;">
-          <div css="flex-grow: 1; display: flex; font-size: 0.8em; margin: 16px; max-width: 900px;">
-            <div css="flex-grow: 1; display: flex; justify-content: left;">
-              <NavLink test={first} url={previousUrl} text="Previous Page" />
-            </div>
-            <div css="display: flex; justify-content: right;">
-              <NavLink test={last} url={nextUrl} text="Next Page" />
-            </div>
-          </div>
-        </div>
-      </Box>
+      </div>
+      <Flex css="max-width: 1024px; margin: 0 auto; align-content: center;">
+        <BlogPosts group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
+        <SideBar group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
+      </Flex>
     </div>
   );
 };

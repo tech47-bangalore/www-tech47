@@ -13,8 +13,7 @@ export const Flex = styled.div`
 
 const hoverStyle = css`
   position: absolute;
-  width: 320px;
-  height: 320px;
+  height: 100%;
   position: relative;
   text-align: center;
   vertical-align: middle;
@@ -22,7 +21,7 @@ const hoverStyle = css`
   border-radius: 5px;
   z-index: 8;
   opacity: 0;
-  background-color: ${colors.third};
+  background-color: ${colors.tech47purple};
   transition: all 1s ease;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -41,8 +40,9 @@ const wrapperOne = css`
 
 // This wrapper defines the fixed width and height and the hover property.
 const wrapperTwo = css`
-  height: 320px;
-  width: 320px;
+  display: flex;
+  justify-content: center;
+  height: auto;
   background-color: ${colors.third};
   transition: all 1s ease;
   -webkit-transition: all 1s ease;
@@ -51,7 +51,7 @@ const wrapperTwo = css`
 
   &:hover {
     & .${hoverStyle} {
-      background-color: ${colors.light};
+      background-color: ${colors.tech47purple};
       display: table;
     }
   }
@@ -62,15 +62,13 @@ const wrapperTwo = css`
 const contentBox = css`
   position: absolute;
   display: block;
-  width: 320px;
-  height: 320px;
+  height: 100%;
 `;
 
 // This is the image wrapper. It is fixed height of 250px. The fixed height prevents the bottom h3 tag from
 // coming up. The padding of 8px pushes the image down by 8px creating some space on top.
 const imgWrapper = css`
   display: block;
-  height: 250px;
   padding: 8px;
 `;
 
@@ -86,22 +84,13 @@ const ServiceCard = ({ name, image, service, urltext, url }) => (
     <div className={wrapperTwo}>
       <div className={contentBox}>
         <div className={imgWrapper}>
-          <img src={image} height="200" width="200" alt="Logo" />
-        </div>
-        <div
-          css={`width: 100%; background-color: ${colors.fifth}; position: absolute;`}
-        >
-          <H3
-            css={`display: block; margin-top: 0; padding: 15px; color: ${colors.secondary};`}
-          >
-            {name}
-          </H3>
+          <img src={image} width="120" alt="Logo" />
         </div>
       </div>
       <div className={hoverStyle}>
         <div css="display: table-cell; vertical-align: middle">
-          <Flex>
-            <p css="padding: 8px;"> {service} </p>
+          <Flex css="padding: 8px; font-size: 0.8em;">
+            <p> {service} </p>
             <Link to={url}>
               <ButtonPrimary>{urltext}</ButtonPrimary>
             </Link>

@@ -60,6 +60,12 @@ const bgImageDiv = css`
   }
 `;
 
+const bgColor = css`
+  width: 100%;
+	height: 50vh;
+	background: linear-gradient(rgba(75,63,255,1), rgba(173,60,203,1));
+`;
+
 export default ({ data }) => {
   const { imageOne } = data;
   const myData = data.allContentJson.edges[0].node.index;
@@ -106,7 +112,7 @@ export default ({ data }) => {
         />
         <meta name="twitter:image" content={tagimage} />
       </Helmet>
-      <div className={bgImageDiv}>
+      <div className={bgColor}>
         {/* <Img sizes={imageOne.sizes} alt="AWS Cloud, Serverless, Reactjs" /> */}
       </div>
       <Box>

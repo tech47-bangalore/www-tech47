@@ -5,23 +5,35 @@ import { css, keyframes } from 'react-emotion';
 import hex2rgba from 'hex2rgba';
 import { rhythm, options } from '../../utils/typography';
 import presets from '../../utils/presets';
+import colors from '../../utils/colors';
 
 const stripeAnimation = keyframes`
   0%: { background-position: 0 0 };
   100%: { background-position: 30px 60px };
 `;
 
+const bodyStyle = css`
+  font-size: 0.9em;
+  color: ${colors.gray.calm};
+  margin-top: ${rhythm(0.5)}
+  & a:hover {
+    color: ${colors.tech47blue};
+  };
+`;
+
 const formInputDefaultStyles = css`
   background-color: #fff;
-  border: 1px solid ${presets.colors.primary};
-  border-radius: ${presets.radius}px;
-  color: ${presets.colors.primary};
-  font-family: ${options.headerFontFamily.join(`,`)};
-  padding: ${rhythm(1 / 2)};
+  border: 1px solid ${colors.tech47date};
+  border-radius: 20px;
+  width: 100%;
+  font-size: 0.8em;
+  color: ${colors.primary};
+  padding: ${rhythm(1 / 5)};
+  padding-left: ${rhythm(1)};
   vertical-align: middle;
   transition: all ${presets.animation.speedDefault} ${presets.animation.curveDefault};
-  "::placeholder": {
-    color: presets.colors.tech47;
+  &::placeholder {
+    color: ${colors.tech47date};
     opacity: 1;
   },
 `;
@@ -32,7 +44,7 @@ const formInputDefaultStyles = css`
 // Note: we change `/post` to `/post-json`
 const MAILCHIMP_URL = `https://tech47.us17.list-manage.com/subscribe/post-json?u=8c8c89f69013835cc96304cae&amp;id=0bcd7855d2`;
 
-class EmailCaptureHomePage extends React.Component {
+class EmailCaptureForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -110,16 +122,14 @@ class EmailCaptureHomePage extends React.Component {
     return (
       <div
         css={`
-          border-top: 2px solid ${presets.colors.primary};
-          margin-top: rhythm(3);
-          padding-top: ${rhythm(1)}
+          margin-top: rhythm(2);
+          padding-top: ${rhythm(0.5)}
         `}
       >
         {this.state.status === `success` ? (
-          <div>Thank you! Youʼll receive your first email shortly.</div>
+          <div className={bodyStyle}>Thank you! Youʼll receive your first email shortly.</div>
         ) : (
           <div>
-            <div>Enjoyed this post? Receive the next one in your inbox!</div>
             <form
               id="email-capture"
               method="post"
@@ -130,16 +140,14 @@ class EmailCaptureHomePage extends React.Component {
                 <input
                   type="email"
                   name="email"
-                  placeholder="you@email.com"
+                  placeholder="email address"
                   onChange={this._handleEmailChange}
                   css={`
                     ${formInputDefaultStyles};
-                    margin-top: ${rhythm(1 / 2)};
-                    width: 250px;
                     &:focus {
-                      border-color: presets.colors.lilac;
+                      border-color: ${colors.tech47pink};
                       outline: 0;
-                      box-shadow: 0 0 0 0.2rem ${hex2rgba(presets.colors.primary, 0.25)};
+                      box-shadow: 0 0 0 0.2rem ${hex2rgba(colors.tech47pinkhex, 0.25)};
                     }
                   `}
                 />
@@ -148,15 +156,14 @@ class EmailCaptureHomePage extends React.Component {
                   onClick={this._handleFormSubmit}
                   css={`
                     ${formInputDefaultStyles};
-                    border-color: ${presets.colors.primary};
-                    color: ${presets.colors.primary};
+                    color: ${colors.tech47white};
+                    background-color: ${colors.tech47pink};
+                    border-color: ${colors.tech47pink};
                     cursor: pointer;
-                    font-weight: bold;
-                    margin-left: ${rhythm(1 / 2)};
                     margin-top: ${rhythm(1 / 2)};
                     &:hover, &:focus {
                       background-size: 30px 30px;
-                      background-color: ${presets.colors.primary};
+                      background-color: ${colors.tech47purple};
                       background-image: linear-gradient(45deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent);
                       color: #fff;
                       animation: ${stripeAnimation} 2.8s linear infinite;
@@ -164,7 +171,7 @@ class EmailCaptureHomePage extends React.Component {
                     &:focus {
                       outline: 0;
                       box-shadow: 0 0 0 0.2rem ${hex2rgba(
-                        presets.colors.primary,
+                        colors.primary,
                         0.25
                       )}
                     };
@@ -175,7 +182,7 @@ class EmailCaptureHomePage extends React.Component {
                 {this.state.status === `error` && (
                   <div
                     dangerouslySetInnerHTML={{ __html: this.state.msg }}
-                    css={` margin-top: ${rhythm(1 / 2)}; `}
+                    className={bodyStyle}
                   />
                 )}
               </div>
@@ -187,4 +194,4 @@ class EmailCaptureHomePage extends React.Component {
   }
 }
 
-export default EmailCaptureHomePage;
+export default EmailCaptureForm;
