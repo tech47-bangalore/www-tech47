@@ -50,6 +50,9 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
              color: white;
              font-size: 1.2em;
           `}>
+          <div css={`
+                padding: 0px 32px;
+            `}>
           <Typist cursor={cursor}>
             <span> We love to build the technology that powers your startup. </span>
             <Typist.Backspace count={58} delay={1000} />
@@ -65,8 +68,9 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
             {' '}
             startups.
           </Typist>
+          </div>
         </div>
-      </div>    
+      </div>
       <div className={blogTheme}>
         <Helmet>
           <title> {`Tech47 - Blogs`} </title>

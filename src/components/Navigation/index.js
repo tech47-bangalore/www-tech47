@@ -280,26 +280,6 @@ const basicNav = css`
   height: 3.5rem;
 `;
 
-// Styles for the mobile View of the navigation
-// the margin within the div below sets the svg menu bar distance from the right end.
-const mobileNav = css`
-  ${basicNav};
-
-  & div {
-    margin: 0px 16px 0px auto;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  & div img {
-    display: block;
-    margin: auto;
-  }
-  ${media.mid`
-    display: none;
-  `};
-`;
-
 // Styles for the overlay which pops up, when the menu is clicked
 const mobileStyle = css`
   position: fixed;
@@ -362,7 +342,7 @@ class Navigation extends Component {
       })
     }
   }
-  
+
   toggleNav() {
     if (this.state.mobileActive) {
       this.setState({ mobileActive: false });
@@ -375,7 +355,7 @@ class Navigation extends Component {
     const { isScrolled } = this.state;
     const isRootPath = this.props.location.pathname === '/';
     const shouldBeHide = isRootPath && !isScrolled;
-    
+
     const desktopNav = css`
       ${basicNav};
       background: ${shouldBeHide ? 'transparent' : 'rgba(173,60,203,1)'};
@@ -391,7 +371,32 @@ class Navigation extends Component {
         display: flex;
       `};
     `;
-    
+
+    // Styles for the mobile View of the navigation
+    // the margin within the div below sets the svg menu bar distance from the right end.
+    const mobileNav = css`
+      ${basicNav};
+      background: ${shouldBeHide ? 'transparent' : 'rgba(173,60,203,1)'};
+      transition: background 0.3s ease-out;
+      box-shadow: ${shouldBeHide ? 'none' : '0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12)'};
+      border-top: 4px solid ${colors.tech47pink};
+
+      & div {
+        margin: 0px 16px 0px auto;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      & div img {
+        display: block;
+        margin: auto;
+      }
+      ${media.mid`
+        display: none;
+      `};
+    `;
+
+
     // Menu Style
     const menuStyle = css`
       list-style-type: none;
@@ -418,7 +423,7 @@ class Navigation extends Component {
         )}
       </ul>
     );
-    
+
     return (
       <nav>
         <Box className={desktopNav}>
@@ -446,8 +451,7 @@ class Navigation extends Component {
           >
             <img
               className={logoClass}
-              width={160}
-              height={40}
+              height={20}
               src={this.props.logo}
               alt="Tech47 Logo"
             />
@@ -457,8 +461,9 @@ class Navigation extends Component {
             role="button"
             tabIndex="0"
             onKeyPress={this.toggleNav}
+            css="color: white;"
           >
-            <img src={menusvg} width="32px" height="32px" alt="Menu" />
+            <img src={menusvg} width="24px" alt="Menu" />
           </div>
         </Box>
         {this.state.mobileActive && (
