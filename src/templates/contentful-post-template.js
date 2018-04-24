@@ -128,6 +128,7 @@ const Template = ({ data, location, pathContext }) => {
   if (post.tags !== null && post.tags.length > 0) {
     keywords = post.tags.reduce((x, y) => `${x}, ${y}`);
   }
+  console.log("post.featureImage is :", post.featuredImage);
 
   return (
     <div>
@@ -136,6 +137,7 @@ const Template = ({ data, location, pathContext }) => {
           description={post.description.description}
           image={post.featuredImage ? post.featuredImage.resize.src : null}
           pathname={location.pathname}
+          absoluteUrl={true}
         />
           <ReactHelmet>
             <script>
