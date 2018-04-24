@@ -329,8 +329,6 @@ class Navigation extends Component {
     const isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
     const css1compatY = isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
     const scrollY = supportPageOffset ? window.pageYOffset : css1compatY;
-    console.log("The value of Y is ", scrollY);
-    console.log("The state is ", this.state.isScrolled);
 
     if (scrollY > JUDGE_POSITION_Y) {
       this.setState({

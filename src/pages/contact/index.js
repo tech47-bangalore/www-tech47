@@ -33,48 +33,95 @@ const label = css`
   width: 100%;
 `;
 
-const ContactForm = () => (
-  <Flex>
-    <form
-      css="max-width: 500px;"
-      action="//formspree.io/jaikant@gmail.com"
-      method="POST"
-    >
-      <label className={label} htmlFor="name">
-        <input
-          className={input}
-          type="text"
-          placeholder="Your Name"
-          name="name"
-        />
-      </label>
-      <label className={label} htmlFor="_replyto">
-        <input
-          className={input}
-          type="email"
-          placeholder="Your email ... example@domain.com"
-          name="_replyto"
-        />
-      </label>
-      <label className={label} htmlFor="message">
-        <textarea
-          className={input}
-          name="message"
-          rows="3"
-          placeholder="Your Message"
-        />
-      </label>
-      <input
-        type="hidden"
-        name="_subject"
-        value="Message via http://domain.com"
-      />
-      <ButtonPrimary css="margin-bottom: 32px;" type="submit">
-        Submit
-      </ButtonPrimary>
-    </form>
-  </Flex>
-);
+const encode = (data) => Object.keys(data)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join("&");
+
+
+class ContactForm extends React.Component {
+  state = {
+        name: '',
+        email: '',
+        message: '',
+    }
+
+  expiredCallback = () => navigateTo('/Contact')
+
+  handleSubmit = e => {
+      e.preventDefault()
+
+      if(!e.target.name.value || !e.target.email.value || !e.target.message.value) {
+          return alert('Kindly fill all fields')
+      }
+
+      fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", name: this.state.name, email: this.state.email, message: this.state.message })
+      }).then(() => navigateTo('/thanks'))
+      .catch(error => alert('Something went wrong, please try again!'))
+      e.target.name.value = ''
+      e.target.email.value = ''
+      e.target.message.value = ''
+      return null
+  }
+
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
+
+  render() {
+    const { name, email, message } = this.state
+    return (
+     <Flex>
+       <form
+         css="max-width: 500px;"
+         onSubmit={this.handleSubmit}
+         name="contact"
+         method="post"
+         data-netlify="true"
+         data-netlify-honeypot="bot-field"
+       >
+         <p hidden>
+            <label htmlFor="botField">
+             Don’t fill this out: <input name="bot-field" />
+            </label>
+         </p>
+         <label className={label} htmlFor="name">
+           <input
+             className={input}
+             type="text"
+             placeholder="Your Name"
+             value={name}
+             onChange={this.handleChange}
+             name="name"
+           />
+         </label>
+         <label className={label} htmlFor="email">
+           <input
+             className={input}
+             type="email"
+             placeholder="Your email"
+             name="email"
+             value={email}
+             onChange={this.handleChange}
+           />
+         </label>
+         <label className={label} htmlFor="message">
+           <textarea
+             className={input}
+             name="message"
+             rows="3"
+             placeholder="Your Message"
+             onChange={this.handleChange}
+           />
+         </label>
+         <ButtonPrimary css="margin-bottom: 32px;" type="submit">
+           Submit
+         </ButtonPrimary>
+       </form>
+     </Flex>
+   );
+  }
+}
 
 const Contact = ({ data }) => {
   const { markdownRemark: remark } = data;
