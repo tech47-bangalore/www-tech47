@@ -148,7 +148,7 @@ const dropDownItemStyle = css`
     transition: color 0.15s ease-in;
     transition: background 0.15s ease-in;
     color: ${colors.tech47blue};
-    font-weight: normal;
+    font-weight: 600;
     line-height: 1.3em;
     padding: 12px 16px;
     text-decoration: none;
@@ -401,7 +401,7 @@ class Navigation extends Component {
       display: flex;
       margin: 0;
       width: 33%;
-      font-size: 0.65em;
+      font-size: 0.7em;
       font-weight: 100;
       color: ${shouldBeHide ? `rgba(255,255,255,1)` : `white`};
       justify-content: flex-end;
