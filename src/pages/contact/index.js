@@ -48,22 +48,23 @@ class ContactForm extends React.Component {
   expiredCallback = () => navigateTo('/Contact')
 
   handleSubmit = e => {
-      e.preventDefault()
+    e.preventDefault();
 
-      if(!e.target.name.value || !e.target.email.value || !e.target.message.value) {
-          return alert('Kindly fill all fields')
-      }
+    if(!e.target.name.value || !e.target.email.value || !e.target.message.value) {
+        return alert('Kindly fill all fields')
+    }
 
-      fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", name: this.state.name, email: this.state.email, message: this.state.message })
-      }).then(() => navigateTo('/thanks'))
-      .catch(error => alert('Something went wrong, please try again!'))
+    return fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", name: this.state.name, email: this.state.email, message: this.state.message })
+    }).then(() => {
       e.target.name.value = ''
       e.target.email.value = ''
       e.target.message.value = ''
-      return null
+      return navigateTo('/thanks')
+    })
+    .catch(error => alert(error))
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
