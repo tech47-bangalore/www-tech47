@@ -1,6 +1,7 @@
 /* eslint-disable no-undef, react/prop-types */
 import React from 'react';
 import { css } from 'react-emotion';
+import { navigateTo } from "gatsby-link";
 import { Box, Flex } from '../../components/Layout';
 import colors from '../../utils/colors';
 import ButtonPrimary from '../../components/Buttons';
