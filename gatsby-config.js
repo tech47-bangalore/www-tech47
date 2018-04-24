@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Tech47`,
-    siteUrl: `https://www.tech47.com`,
+    siteUrl: `https://www.tech47.in`,
     description: `Tech47 - Building technology to power your startup`,
     instagram: '/social-media/instagram',
   },
