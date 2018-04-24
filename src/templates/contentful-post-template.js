@@ -1,15 +1,16 @@
 /* eslint-disable no-undef, react/prop-types, react/no-danger */
 import React from 'react';
 import styled, { css } from 'react-emotion';
-import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
+import ReactHelmet from 'react-helmet'
 import { rhythm, scale } from '../utils/typography';
 import { Box, Tags } from '../components/Layout';
 import colors from '../utils/colors';
 import presets from '../utils/presets';
 import feather from '../utils/feather';
 import EmailCaptureForm from "../components/Layout/email-capture-form"
+import Helmet from '../components/helmet';
 
 const blogTheme = css`
   margin-top: ${rhythm(4)};
@@ -118,7 +119,7 @@ const AuthorInfo = ({ post }) =>  (
   );
 
 
-const Template = ({ data, pathContext }) => {
+const Template = ({ data, location, pathContext }) => {
   const { node: post } = data.allContentfulBlogPost.edges[0];
   const { timeToRead, html } = post.blog.childMarkdownRemark;
 
@@ -127,38 +128,16 @@ const Template = ({ data, pathContext }) => {
   if (post.tags !== null && post.tags.length > 0) {
     keywords = post.tags.reduce((x, y) => `${x}, ${y}`);
   }
-  const tagurl = `https://www.tech47.in${slug}`;
-  const tagimage =
-    post.featuredImage != null
-      ? `https:${post.featuredImage.resize.src}`
-      : null;
 
   return (
     <div>
-          <Helmet>
-            <title> {`Tech47 - ${post.title}`} </title>
-            <meta name="description" content={post.description.description} />
-            <meta name="Keywords" content={keywords} />
-            <meta property="og:title" content={post.title} />
-            <meta
-              property="og:description"
-              content={post.description.description}
-            />
-            <meta property="og:url" content={tagurl} />
-            <meta property="og:image" content={tagimage} />
-            <meta
-              property="og:site_name"
-              content="We build technology for social good"
-            />
-            <meta property="og:type" content="article" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={post.title} />
-            <meta name="twitter:url" content={tagurl} />
-            <meta
-              name="twitter:description"
-              content={post.description.description}
-            />
-            <meta name="twitter:image" content={tagimage} />
+        <Helmet
+          title={`Tech47 - ${post.title}`}
+          description={post.description.description}
+          image={post.featuredImage ? post.featuredImage.resize.src : null}
+          pathname={location.pathname}
+        />
+          <ReactHelmet>
             <script>
               {`
                 (function(w, d){
@@ -173,7 +152,7 @@ const Template = ({ data, pathContext }) => {
                 })(window, document);
               `}
             </script>
-          </Helmet>
+          </ReactHelmet>
       <div className={blogTheme}>
         <Box>
           <h1>{post.title}</h1>

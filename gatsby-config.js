@@ -2,6 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `Tech47`,
     siteUrl: `https://www.tech47.com`,
+    description: `Tech47 - Building technology to power your startup`,
+    instagram: '/social-media/instagram',
   },
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorsYaml'

@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from 'react';
 import Link from 'gatsby-link';
-import Helmet from 'react-helmet';
 import Typist from 'react-typist';
 import { Box, Flex, Tags, BlogPosts, SideBar } from '../components/Layout';
 import FaHeart from 'react-icons/lib/fa/heart';
-import colors from '../utils/colors';
 import styled, { css } from 'react-emotion';
+import colors from '../utils/colors';
+import Helmet from '../components/helmet';
 
 const blogTheme = css`
   h1, h2, h3, h4, h5, h6 {
@@ -23,15 +23,12 @@ const bgColor = css`
 	background: linear-gradient(${colors.tech47blue}, ${colors.tech47purple});
 `;
 
-const ContentfulBlogIndex = ({ data, pathContext }) => {
+const ContentfulBlogIndex = ({ data, location, pathContext }) => {
 //  const { edges: posts } = data.allMarkdownRemark;
 // The below objects are coming from gatsby-paginate
   const { group, index, first, last, pathPrefix } = pathContext;
   const previousUrl = index - 1 == 1 ? pathPrefix : pathPrefix + "/" + (index - 1).toString();
   const nextUrl = pathPrefix + "/" + (index + 1).toString();
-  const tagurl = first ? `https://www.tech47.in${pathPrefix}` :
-    `https://www.tech47.in${pathPrefix}/${index.toString}`;
-  const tagimage = `https://www.tech47.in${data.imageOne.resize.src}`;
   const cursor = {
     show: true,
     blink: true,
@@ -72,37 +69,12 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
         </div>
       </div>
       <div className={blogTheme}>
-        <Helmet>
-          <title> {`Tech47 - Blogs`} </title>
-          <meta
-            name="description"
-            content="Technology blogs on tech47, covering a varied topics
-             from modern web to using technology for social good."
-          />
-          <meta name="Keywords" content={"Technology, Modern Web, Social Good, Reactjs, Fullstack, Cloud"} />
-          <meta property="og:title" content="Tech47 - Blogs" />
-          <meta
-            property="og:description"
-            content="Technology blogs on tech47, covering a varied topics
-             from modern web to using technology for social good."
-          />
-          <meta property="og:url" content={tagurl} />
-          <meta property="og:image" content={tagimage} />
-          <meta
-            property="og:site_name"
-            content="We build technology for social good"
-          />
-          <meta property="og:type" content="article" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Tech47 - Blogs" />
-          <meta name="twitter:url" content={tagurl} />
-          <meta
-            name="twitter:description"
-            content="Technology blogs on tech47, covering a varied topics
-             from modern web to using technology for social good."
-          />
-          <meta name="twitter:image" content={tagimage} />
-        </Helmet>
+        <Helmet
+          title={"Tech47 - Technology to power your startup"}
+          description={"We build modern websites, apps & progressive web apps"}
+          image={data.imageOne ? data.imageOne.resize.src : null}
+          pathname={location.pathname}
+        />
       </div>
       <Flex css="max-width: 1024px; margin: 0 auto; align-content: center;">
         <BlogPosts group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
@@ -114,7 +86,7 @@ const ContentfulBlogIndex = ({ data, pathContext }) => {
 
 export const contentfulQuery = graphql`
   query ContentfulQuery {
-    imageOne: imageSharp(id: { regex: "/ogtech47/" }) {
+    imageOne: imageSharp(id: { regex: "/cover/" }) {
       resize(width: 1200, height: 630, cropFocus: CENTER) {
         # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
         src
