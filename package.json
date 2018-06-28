@@ -90,7 +90,7 @@
     "gatsby-plugin-react-helmet": "2.0.9",
     "jest": "21.2.1",
     "object-fit-images": "3.2.3",
-    "prettier": "1.7.4",
+    "prettier": "1.13.7",
     "react-helmet": "5.2.0"
   }
 }
