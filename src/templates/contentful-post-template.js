@@ -36,6 +36,21 @@ const blogTheme = css`
       color: ${colors.linkvisited};
     }
   }
+  table, tr, td, th {
+    border: 1px solid ${colors.light};
+  }
+  thead {
+    background: ${colors.gray.calm};
+    color: ${colors.third}
+    padding: 8px;
+  }
+  th {
+    padding: 8px;
+  }
+  td {
+  	flex: 1 1 20%;
+    padding: 8px;
+  }
 `;
 
 const prevNextLabelStyles = css`
