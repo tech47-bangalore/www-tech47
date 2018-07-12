@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "email-validator": "^1.1.1",
-    "emotion": "^8.0.8",
+    "emotion": "^9.0.0",
     "emotion-server": "^8.0.8",
     "emotion-theming": "^8.0.11",
     "feather-icons": "^3.3.0",
