@@ -87,7 +87,7 @@ const ContentfulBlogIndex = ({ data, location, pathContext }) => {
 
 export const contentfulQuery = graphql`
   query ContentfulQuery {
-    imageOne: imageSharp(id: { regex: "/cover/" }) {
+    imageOne: imageSharp(fluid: {originalName: { regex: "/cover/" }}) {
       resize(width: 1200, height: 630, cropFocus: CENTER) {
         # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
         src
