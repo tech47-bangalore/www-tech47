@@ -1,5 +1,5 @@
 import objectFitImages from 'object-fit-images';
 
-exports.onInitialClientRender = () => {
+export const onInitialClientRender = () => {
   objectFitImages();
 };

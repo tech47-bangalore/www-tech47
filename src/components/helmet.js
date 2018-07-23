@@ -45,8 +45,8 @@ Helmet.propTypes = {
   image: PropTypes.string,
   imageWidth: PropTypes.string,
   imageHeight: PropTypes.string,
-  absoluteUrl: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  absoluteUrl: PropTypes.bool,
+  children: PropTypes.element,
 };
 Helmet.defaultProps = {
   title: null,
@@ -91,7 +91,7 @@ RealHelmet.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  absoluteUrl: PropTypes.string,
+  absoluteUrl: PropTypes.bool,
   pathname: PropTypes.string.isRequired,
 };
 RealHelmet.defaultProps = {

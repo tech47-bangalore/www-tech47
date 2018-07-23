@@ -5,6 +5,7 @@ import Typist from 'react-typist';
 import { Box, Flex, Tags, BlogPosts, SideBar } from '../components/Layout';
 import FaHeart from 'react-icons/lib/fa/heart';
 import styled, { css } from 'react-emotion';
+import Layout from '../layouts';
 import colors from '../utils/colors';
 import Helmet from '../components/helmet';
 
@@ -37,7 +38,7 @@ const ContentfulBlogIndex = ({ data, location, pathContext }) => {
     hideWhenDoneDelay: 1000,
   }
   return (
-    <div>
+    <Layout location={location}>
       <div className={bgColor}>
         <div css={`
              padding-top: 17vh;
@@ -80,7 +81,7 @@ const ContentfulBlogIndex = ({ data, location, pathContext }) => {
         <BlogPosts group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
         <SideBar group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
       </Flex>
-    </div>
+    </Layout>
   );
 };
 

@@ -1,10 +1,11 @@
 /* eslint-disable no-undef, react/prop-types */
 import React from 'react';
 import { css } from 'react-emotion';
-import { navigateTo } from "gatsby-link";
+import { push, graphql } from "gatsby";
 import { Box, Flex } from '../../components/Layout';
 import colors from '../../utils/colors';
 import ButtonPrimary from '../../components/Buttons';
+import Layout from '../../layouts';
 
 const input = css`
   display: block;
@@ -46,7 +47,7 @@ class ContactForm extends React.Component {
         message: '',
     }
 
-  expiredCallback = () => navigateTo('/Contact')
+  expiredCallback = () => push('/Contact')
 
   handleSubmit = e => {
     e.preventDefault();
@@ -59,7 +60,7 @@ class ContactForm extends React.Component {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({ "form-name": "contact", name: this.state.name, email: this.state.email, message: this.state.message })
-    }).then(() => navigateTo('/thanks'))
+    }).then(() => push('/thanks'))
     .catch(error => alert(error))
   }
 
@@ -68,71 +69,73 @@ class ContactForm extends React.Component {
   render() {
     const { name, email, message } = this.state
     return (
-     <Flex>
-       <form
-         css="max-width: 500px;"
-         onSubmit={this.handleSubmit}
-         name="contact"
-         method="post"
-         data-netlify="true"
-         data-netlify-honeypot="bot-field"
-       >
-         <p hidden>
-            <label htmlFor="botField">
-             Don’t fill this out: <input name="bot-field" />
-            </label>
-         </p>
-         <label className={label} htmlFor="name">
-           <input
-             className={input}
-             type="text"
-             placeholder="Your Name"
-             value={name}
-             onChange={this.handleChange}
-             name="name"
-           />
-         </label>
-         <label className={label} htmlFor="email">
-           <input
-             className={input}
-             type="email"
-             placeholder="Your email"
-             name="email"
-             value={email}
-             onChange={this.handleChange}
-           />
-         </label>
-         <label className={label} htmlFor="message">
-           <textarea
-             className={input}
-             name="message"
-             rows="3"
-             placeholder="Your Message"
-             onChange={this.handleChange}
-           />
-         </label>
-         <ButtonPrimary css="margin-bottom: 32px;" type="submit">
-           Submit
-         </ButtonPrimary>
-       </form>
-     </Flex>
+       <Flex>
+         <form
+           css="max-width: 500px;"
+           onSubmit={this.handleSubmit}
+           name="contact"
+           method="post"
+           data-netlify="true"
+           data-netlify-honeypot="bot-field"
+         >
+           <p hidden>
+              <label htmlFor="botField">
+               Don’t fill this out: <input name="bot-field" />
+              </label>
+           </p>
+           <label className={label} htmlFor="name">
+             <input
+               className={input}
+               type="text"
+               placeholder="Your Name"
+               value={name}
+               onChange={this.handleChange}
+               name="name"
+             />
+           </label>
+           <label className={label} htmlFor="email">
+             <input
+               className={input}
+               type="email"
+               placeholder="Your email"
+               name="email"
+               value={email}
+               onChange={this.handleChange}
+             />
+           </label>
+           <label className={label} htmlFor="message">
+             <textarea
+               className={input}
+               name="message"
+               rows="3"
+               placeholder="Your Message"
+               onChange={this.handleChange}
+             />
+           </label>
+           <ButtonPrimary css="margin-bottom: 32px;" type="submit">
+             Submit
+           </ButtonPrimary>
+         </form>
+       </Flex>
    );
   }
 }
 
-const Contact = ({ data }) => {
+const Contact = ({ data, location }) => {
   const { markdownRemark: remark } = data;
   return (
-    <Box bg={colors.primary}>
-      <Box css="margin: 2.5em">
-        <h1>{remark.frontmatter.title}</h1>
-        <div
-          css="text-align: left;"
-          dangerouslySetInnerHTML={{ __html: remark.html }}
-        />
-        <ContactForm />
+    <Layout location={location}>
+      <Box bg={colors.primary}>
+        <Box css="margin: 2.5em">
+          <h1>{remark.frontmatter.title}</h1>
+          <div
+            css="text-align: left;"
+            dangerouslySetInnerHTML={{ __html: remark.html }}
+          />
+          <ContactForm/>
+        </Box>
       </Box>
-    </Box>
+    </Layout>
   );
 };
 

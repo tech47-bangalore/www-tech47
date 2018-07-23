@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import { Box, Flex, Tags, MainPost } from '.';
 import FaLongArrowRight from 'react-icons/lib/fa/long-arrow-right';
 import Img from 'gatsby-image';
@@ -111,7 +111,7 @@ const BlogPosts = ({ group, first, last, previousUrl, nextUrl }) => {
            .filter(post => post.node.featured == "featured")
            .map(({ node: post }, index) => {
              return (
-               <MainPost post={post}/>
+               <MainPost key={post.id} post={post}/>
              )
            }
          )

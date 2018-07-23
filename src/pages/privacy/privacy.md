@@ -135,7 +135,7 @@ and we will promptly remove you from ALL correspondence.
 
 If there are any questions regarding this privacy policy, you may contact us using the information below.
 
-TECH47.com
+TECH47.in
 HBR Layout
 Bengaluru, Karnataka 560043
 India

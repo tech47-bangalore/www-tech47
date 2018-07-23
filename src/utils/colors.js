@@ -118,4 +118,4 @@ colorStr
     }
   });
 
-module.exports = colors
+export default colors

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import Link from 'gatsby-link';
+import { graphql, Link } from "gatsby";
 import Img from 'gatsby-image';
 import { Box, Flex, Tags } from '../components/Layout';
 import colors from '../utils/colors';
@@ -45,11 +45,14 @@ const BlogCard = styled.div`
   text-align: left;
   border-style: solid;
   border-width: thin;
+  background-color: ${colors.fifth};
   border-color: ${colors.light}
 
   img,
-  h4 {
+  h4, 
+  div {
     margin: auto;
+    overflow: hidden;
   }
 
   .${excerptStyle} {
@@ -133,8 +136,17 @@ export default function TagsPage({ pathContext }) {
           {Object.keys(posts).map(tagName => <Tags list={[tagName] || []} />)}
         </Flex>
       </Flex>
-      <Flex css="font-size: 0.8em; margin: 1em;">
-        <Link to="/blog">All posts</Link>
+      <Flex css={`
+              font-size: 0.8em; 
+              margin: 1em;
+              color: ${colors.tech47category};
+              a:hover {
+                color: ${colors.tech47categoryhover};
+                transition: color 0.15s ease-in;
+              }
+            `}
+      >
+        <Link to="/">All posts</Link>
       </Flex>
     </Box>
   );

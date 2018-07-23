@@ -4,13 +4,16 @@ import styled, { css } from 'react-emotion';
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
 import ReactHelmet from 'react-helmet'
-import { rhythm, scale } from '../utils/typography';
+import typography from '../utils/typography';
 import { Box, Tags } from '../components/Layout';
 import colors from '../utils/colors';
 import presets from '../utils/presets';
 import feather from '../utils/feather';
 import EmailCaptureForm from "../components/Layout/email-capture-form"
 import Helmet from '../components/helmet';
+import Layout from '../layouts';
+
+const { rhythm, scale }  = typography
 
 const blogTheme = css`
   margin-top: ${rhythm(4)};
@@ -143,10 +146,9 @@ const Template = ({ data, location, pathContext }) => {
   if (post.tags !== null && post.tags.length > 0) {
     keywords = post.tags.reduce((x, y) => `${x}, ${y}`);
   }
-  console.log("post.featureImage is :", post.featuredImage);
 
   return (
-    <div>
+    <Layout location={location}>
         <Helmet
           title={`Tech47 - ${post.title}`}
           description={post.description.description}
@@ -230,7 +232,7 @@ const Template = ({ data, location, pathContext }) => {
           </div>
         </Box>
       </div>
-    </div>
+    </Layout>
   );
 };
 

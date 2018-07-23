@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { css } from 'react-emotion';
 import colors from '../../utils/colors';
@@ -16,6 +16,7 @@ const ulStyle = css`
 
 const linkStyle = css`
   font-size: 0.8em;
+  margin: 0.8em;
   color: ${colors.tech47category};
   &:hover {
       color: ${colors.tech47categoryhover};

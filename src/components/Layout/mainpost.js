@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import { Box, Flex, Tags } from '.';
 import FaLongArrowRight from 'react-icons/lib/fa/long-arrow-right';
 import Img from 'gatsby-image';
@@ -92,7 +92,6 @@ const StyledSpan = styled.span`
 `;
 
 const MainPost = ({ post }) => {
-  console.log("The post is :", post);
   const image = post.featuredImage
     ? post.featuredImage.sizes
     : null;

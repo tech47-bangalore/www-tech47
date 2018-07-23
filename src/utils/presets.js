@@ -1,6 +1,6 @@
 import colors from './colors';
 
-module.exports = {
+export default  {
   colors,
   mobile: `(min-width: 400px)`,
   Mobile: `@media (min-width: 360px)`,

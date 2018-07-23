@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import FaChevronDown from "react-icons/lib/fa/chevron-down";
@@ -479,9 +479,9 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  logo: PropTypes.string.isRequired,
-  logoWhite: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired
+  logo: PropTypes.string,
+  logoWhite: PropTypes.string,
+  location: PropTypes.object,
 };
 
 Navigation.defaultProps = {

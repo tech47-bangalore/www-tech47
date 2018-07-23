@@ -3,6 +3,7 @@ const path = require('path');
 const slash = require('slash');
 const createPaginatedPages = require('gatsby-paginate');
 
+/*
 exports.modifyWebpackConfig = ({ config, stage }) => {
   switch (stage) {
     case 'develop':
@@ -15,6 +16,8 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
   }
   return config;
 };
+*/
+
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;

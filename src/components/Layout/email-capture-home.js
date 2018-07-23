@@ -3,9 +3,11 @@ import jsonp from 'jsonp';
 import { validate } from 'email-validator';
 import { css, keyframes } from 'react-emotion';
 import hex2rgba from 'hex2rgba';
-import { rhythm, options } from '../../utils/typography';
+import typography from '../../utils/typography';
 import presets from '../../utils/presets';
 import colors from '../../utils/colors';
+
+const { rhythm, options }  = typography
 
 const stripeAnimation = keyframes`
   0%: { background-position: 0 0 };

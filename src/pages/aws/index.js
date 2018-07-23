@@ -1,8 +1,10 @@
 /* eslint-disable no-undef, react/prop-types */
 import React from 'react';
 import { css } from 'react-emotion';
+import { graphql } from "gatsby";
 import { Box } from '../../components/Layout';
 import colors from '../../utils/colors';
+import Layout from '../../layouts';
 
 const blogTheme = css`
   max-width: 900px;
@@ -15,18 +17,20 @@ const blogTheme = css`
   }
 `;
 
-const AWS = ({ data }) => {
+const AWS = ({ data, location }) => {
   const { markdownRemark: remark } = data;
   return (
-    <div className={blogTheme}>
-      <Box css="margin: auto 16px auto 16px;">
-        <h1>{remark.frontmatter.title}</h1>
-        <div
-          css="text-align: left; a { color : #02a9f7;}"
-          dangerouslySetInnerHTML={{ __html: remark.html }}
-        />
-      </Box>
-    </div>
+    <Layout location={location}>
+      <div className={blogTheme}>
+        <Box css="margin: auto 16px auto 16px;">
+          <h1>{remark.frontmatter.title}</h1>
+          <div
+            css="text-align: left; a { color : #02a9f7;}"
+            dangerouslySetInnerHTML={{ __html: remark.html }}
+          />
+        </Box>
+      </div>
+    </Layout>
   );
 };
 

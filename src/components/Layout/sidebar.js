@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import { Box, Flex, Tags, EmailCaptureHomePage, ServiceCard } from '.';
 import FaLongArrowRight from 'react-icons/lib/fa/long-arrow-right';
 import Img from 'gatsby-image';
