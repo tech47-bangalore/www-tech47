@@ -118,6 +118,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                        srcSet
                      }
                    }
+                  author{
+                    name
+                    profilePicture{
+                      resolutions(width:50,height:50){
+                        src
+                      }
+                    }
+                  }
                  }
                }
             }
@@ -148,6 +156,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     sizes
                  }
                }
+              author{
+                    name
+                    profilePicture{
+                      resolutions(width:50,height:50){
+                        src
+                      }
+                    }
+                  }
              }
           }
         `

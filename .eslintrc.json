@@ -23,6 +23,7 @@
         "graphql": true
     },
     "rules": {
+        "linebreak-style": 0,
         "prettier/prettier": "warn",
         "react/jsx-indent": "warn",
         "import/no-extraneous-dependencies": "off",
