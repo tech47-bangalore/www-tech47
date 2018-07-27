@@ -40,11 +40,13 @@ const menuConfig = [
       { title: 'Serverless Apps', url: '/serverless' },
       { title: 'Fullstack', url: '/fullstack' },
       { title: 'AWS Cloud', url: '/aws' }
+
     ],
     submenu: true
   },
   { title: 'ABOUT', url: '/about', submenu: false },
   { title: 'CONTACT', url: '/Contact', submenu: false },
+   {team:'Team' url:'/team', submenu: false}
 ];
 
 // In this file we have tried to place the styles as close as possible to the components
