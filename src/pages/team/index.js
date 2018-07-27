@@ -4,7 +4,6 @@ import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
 import styled, { css } from 'react-emotion'
 import Card from '../../components/team/card.js'
-import pic01 from '../../assets/images/team.jpeg'
 
 
 const container =css`
