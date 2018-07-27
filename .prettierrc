@@ -1,7 +1,5 @@
 {
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "jsxBracketSameLine": false,
-    "parser": "babylon"
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "es5"
 }
