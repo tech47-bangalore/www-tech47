@@ -19,8 +19,8 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
 */
 
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators;
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
   //We check for fileAbsolutePath to skip contentful nodes only nodes on filesystem.
   if (node.internal.type === 'MarkdownRemark' && node.fileAbsolutePath != null) {
     const fileNode = getNode(node.parent);
@@ -78,8 +78,8 @@ const createTagPages = (createPage, edges) => {
     });
 }
 // image dimensions 268 * 0.75 = 201
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
   return new Promise((resolve, reject) => {
 
     //contentful fragment taken from https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-contentful/src/fragments.js

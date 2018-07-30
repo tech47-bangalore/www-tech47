@@ -84,8 +84,8 @@ const StyledSpan = styled.span`
   font-size: 0.65em;
 `;
 
-export default function TagsPage({ pathContext }) {
-  const { posts, post, tag } = pathContext;
+export default function TagsPage({ pageContext }) {
+  const { posts, post, tag } = pageContext;
   if (tag) {
     return (
       <Box>
@@ -152,7 +152,7 @@ export default function TagsPage({ pathContext }) {
   );
 }
 TagsPage.propTypes = {
-  pathContext: PropTypes.shape({
+  pageContext: PropTypes.shape({
     // Remove prop validation for below object with custom prop validation which never returns error.
     posts: PropTypes.objectOf(() => {}).isRequired,
 

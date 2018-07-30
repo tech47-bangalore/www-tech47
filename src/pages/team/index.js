@@ -4,6 +4,8 @@ import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
 import styled, { css } from 'react-emotion'
 import Card from '../../components/team/card.js'
+import pic01 from '../../assets/images/team.jpeg'
+import Layout from '../../layouts';
 
 
 const container =css`
@@ -57,7 +59,7 @@ render(){
 	const we= this.props.data.allContentfulTeamImages.edges['0'].node.teamImages;
 
 	return(
-		<React.Fragment>
+		<Layout location={this.props.location}>
 
 			<div className={container}>
 				<img src={pic01} className={bannerImage}/>
@@ -71,7 +73,7 @@ render(){
 			 		fullName={team.title}/>))
 			 }	
 			</div>	
-		</React.Fragment>)
+		</Layout>)
 }
 
 }

@@ -24,10 +24,10 @@ const bgColor = css`
 	background: linear-gradient(${colors.tech47blue}, ${colors.tech47purple});
 `;
 
-const ContentfulBlogIndex = ({ data, location, pathContext }) => {
+const ContentfulBlogIndex = ({ data, location, pageContext }) => {
 //  const { edges: posts } = data.allMarkdownRemark;
 // The below objects are coming from gatsby-paginate
-  const { group, index, first, last, pathPrefix } = pathContext;
+  const { group, index, first, last, pathPrefix } = pageContext;
   const previousUrl = index - 1 == 1 ? pathPrefix : pathPrefix + "/" + (index - 1).toString();
   const nextUrl = pathPrefix + "/" + (index + 1).toString();
   const cursor = {
