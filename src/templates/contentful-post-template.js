@@ -137,11 +137,11 @@ const AuthorInfo = ({ post }) =>  (
   );
 
 
-const Template = ({ data, location, pathContext }) => {
+const Template = ({ data, location, pageContext }) => {
   const { node: post } = data.allContentfulBlogPost.edges[0];
   const { timeToRead, html } = post.blog.childMarkdownRemark;
 
-  const { next, prev, slug } = pathContext;
+  const { next, prev, slug } = pageContext;
   let keywords = '';
   if (post.tags !== null && post.tags.length > 0) {
     keywords = post.tags.reduce((x, y) => `${x}, ${y}`);

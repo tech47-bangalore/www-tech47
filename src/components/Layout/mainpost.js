@@ -14,7 +14,9 @@ const tagStyle = css`
 `;
 
 const seemoreStyle = css`
-  display: inline-block;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   font-size: 0.9em;
   color: ${colors.gray.copy};
   float: right;
@@ -23,7 +25,37 @@ const seemoreStyle = css`
     color: ${colors.gray.calm};
   }
 `;
+const author = css`
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+`
+const link =css`
+  margin-top:13px;  
 
+`
+const img=css`
+  width: 25px;
+  height: 25px;
+ -webkit-filter: grayscale(180%);
+  filter: grayscale(180%);
+  opacity: 1;
+  border-radius:50%;
+  transition: all 1s ease;
+  & :hover{
+    -webkit-filter: opacity(100%);
+      filter: opacity(100%);
+  }
+ `
+ const authorName=css`
+  position:absolute;
+  top:15%;
+  left:40px;
+  color: ${colors.light};
+  font-size: 0.65em;
+    
+ `
 const dateStyle = css`
   font-size: 0.6em;
   color: ${colors.tech47date};
@@ -128,7 +160,13 @@ const MainPost = ({ post }) => {
                 </div>
               </Link>
               <div className={seemoreStyle}>
-                <Link to={post.slug}>
+                <div className={author}>
+                      <Img resolutions={post.author.profilePicture.resolutions} 
+                        alt={post.author.name}
+                      className={img}/>
+                      <p className={authorName}>{post.author.name}</p>
+                </div>
+                <Link to={post.slug} className={link}>
                   <span css="padding: 16px;"> See More </span>
                   <FaLongArrowRight
                     css={css({
