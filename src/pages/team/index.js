@@ -60,7 +60,7 @@ render(){
 	return(
 		<Layout location={this.props.location}>
 			<Helmet
-	          title='Teach47 | team'
+	          title='Tech47 | team'
 	          description='Tech47-team'
 	          image={pic01}
 	          pathname={this.props.location.pathname}
