@@ -64,7 +64,7 @@ render(){
 	          description='Tech47-team'
 	          image={pic01}
 	          pathname={this.props.location.pathname}
-	          absoluteUrl={true}
+	          absoluteUrl={false}
         	/>
 
 			<div className={container}>

@@ -16,7 +16,7 @@ const tagStyle = css`
 const seemoreStyle = css`
   display:flex;
   justify-content:space-between;
-  aling-items:center;
+  align-items:center;
   font-size: 0.9em;
   color: ${colors.gray.copy};
   padding: 16px 0px;
