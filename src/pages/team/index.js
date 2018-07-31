@@ -53,7 +53,6 @@ const textbanner = css`
 `
 class TeamPage extends React.Component{
 render(){
-	console.log(this.props)
 	const we= this.props.data.TeamImages.edges['0'].node.teamImages;
 	const bannerImage = this.props.data.BannerImage.edges['0'].node.teamBanner;
 
