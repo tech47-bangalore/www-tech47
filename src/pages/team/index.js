@@ -6,6 +6,7 @@ import styled, { css } from 'react-emotion'
 import Card from '../../components/team/card.js'
 import pic01 from '../../assets/images/team.jpeg'
 import Layout from '../../layouts';
+import Helmet from '../../components/helmet';
 
 
 const container =css`
@@ -25,8 +26,6 @@ const teamCards =css`
  		align-items:center;
  		margin-top:60px;
  		margin-bottom:60px;
- 	
-
 `
 const bannerImage=css`
 	flex-basis:1800px;
@@ -60,6 +59,13 @@ render(){
 
 	return(
 		<Layout location={this.props.location}>
+			<Helmet
+	          title='Teach47 | team'
+	          description='Tech47-team'
+	          image={pic01}
+	          pathname={this.props.location.pathname}
+	          absoluteUrl={true}
+        	/>
 
 			<div className={container}>
 				<img src={pic01} className={bannerImage}/>

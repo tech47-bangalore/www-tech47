@@ -16,10 +16,9 @@ const tagStyle = css`
 const seemoreStyle = css`
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  aling-items:center;
   font-size: 0.9em;
   color: ${colors.gray.copy};
-  float: right;
   padding: 16px 0px;
   & a:hover {
     color: ${colors.gray.calm};
@@ -124,6 +123,7 @@ const StyledSpan = styled.span`
 `;
 
 const MainPost = ({ post }) => {
+  console.log(post)
   const image = post.featuredImage
     ? post.featuredImage.sizes
     : null;
