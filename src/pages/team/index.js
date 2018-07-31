@@ -54,17 +54,18 @@ const textbanner = css`
 `
 class TeamPage extends React.Component{
 render(){
-	// console.log(this.props)
-	const we= this.props.data.allContentfulTeamImages.edges['0'].node.teamImages;
+	console.log(this.props)
+	const we= this.props.data.TeamImages.edges['0'].node.teamImages;
+	const bannerImage = this.props.data.BannerImage.edges['0'].node.teamBanner;
 
 	return(
 		<Layout location={this.props.location}>
 			<Helmet
 	          title='Tech47 | team'
 	          description='Tech47-team'
-	          image={pic01}
+	          image={bannerImage.resolutions.src}
 	          pathname={this.props.location.pathname}
-	          absoluteUrl={false}
+	          absoluteUrl={true}
         	/>
 
 			<div className={container}>
@@ -86,13 +87,24 @@ render(){
 
 export const contentfulTeamQuery = graphql`
   query TeamQuery {
-  allContentfulTeamImages{
+  TeamImages:allContentfulTeamImages{
    	edges{
       node{
         teamImages{
           title
           description
           resolutions(width:150, height: 150){
+           ...GatsbyContentfulResolutions
+          }
+        }
+      }
+    }
+  }
+  BannerImage:allContentfulTeamBanner{
+    edges{
+      node{
+        teamBanner{
+        	resolutions(width:1800, height: 380){
            ...GatsbyContentfulResolutions
           }
         }
