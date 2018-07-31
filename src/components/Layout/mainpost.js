@@ -123,7 +123,6 @@ const StyledSpan = styled.span`
 `;
 
 const MainPost = ({ post }) => {
-  console.log(post)
   const image = post.featuredImage
     ? post.featuredImage.sizes
     : null;
