@@ -19,7 +19,6 @@ const seemoreStyle = css`
   align-items:center;
   font-size: 0.9em;
   color: ${colors.gray.copy};
-  float: right;
   padding: 16px 0px;
   & a:hover {
     color: ${colors.gray.calm};

@@ -22,20 +22,19 @@ const card =css`
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
-	align-item: center;
+	align-items: center;
 	opacity:0.5;
 	box-sizing:border-box;
 	padding:20px 70px;
 	transition: all 1s ease;
 	& :hover{
-	  opacity: 1
+	  opacity: 1;
 	  background-color:#f2dff7;
 	  .${img}{
 	  	-webkit-filter: opacity(100%);
 	    filter: opacity(100%);
 	  }
 	}
-	
 `
 
 const CardBody =css`
