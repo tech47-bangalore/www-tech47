@@ -79,7 +79,7 @@ const ContentfulBlogIndex = ({ data, location, pageContext }) => {
       </div>
       <Flex css="max-width: 1024px; margin: 0 auto; align-content: center;">
         <BlogPosts group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
-        <SideBar group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/>
+        {/* <SideBar group={group} first={first} last={last} previousUrl={previousUrl} nextUrl={nextUrl}/> */}
       </Flex>
     </Layout>
   );

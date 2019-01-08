@@ -34,19 +34,19 @@ const outerstyle = css`
 `;
 
 const menuConfig = [
-  {
-    title: 'SERVICES',
-    url: [
-      { title: 'Serverless Apps', url: '/serverless' },
-      { title: 'Fullstack', url: '/fullstack' },
-      { title: 'AWS Cloud', url: '/aws' }
+  // {
+  //   title: 'SERVICES',
+  //   url: [
+  //     { title: 'Serverless Apps', url: '/serverless' },
+  //     { title: 'Fullstack', url: '/fullstack' },
+  //     { title: 'AWS Cloud', url: '/aws' }
 
-    ],
-    submenu: true
-  },
-  { title: 'ABOUT', url: '/about', submenu: false },
-  { title: 'CONTACT', url: '/Contact', submenu: false },
-  {title:'TEAM', url:'/team', submenu: false}
+  //   ],
+  //   submenu: true
+  // },
+  // { title: 'ABOUT', url: '/about', submenu: false },
+  // { title: 'CONTACT', url: '/Contact', submenu: false },
+  // {title:'TEAM', url:'/team', submenu: false}
 ];
 
 // In this file we have tried to place the styles as close as possible to the components
